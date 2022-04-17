@@ -1,3 +1,0 @@
-/home/chris/Repositories/lisp-in-c/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/chris/Repositories/lisp-in-c/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/chris/Repositories/lisp-in-c/cmake-build-debug/CMakeFiles/lisp_in_c.dir
