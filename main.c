@@ -139,6 +139,21 @@ Token read_number(File *src) {
     return new_token(INT, n);
 }
 
+Token read_ident(File *src) {
+    int c;
+    int len = 8;
+    char *ident = malloc(len*sizeof(char));
+    while (isalnum(c = file_peek(src) || c == '_')) {
+        if (strlen(ident) >= len) {
+            len *= 2;
+            ident = (char *) realloc(ident, len*sizeof(char));
+        }
+        ident += c;
+        file_next(src);
+    }
+    return new_token(IDENT, ident);
+}
+
 Token *lex(File *src) {
     Token *tokens = malloc(MAX_TOKENS * sizeof(Token));
     int c;
@@ -172,6 +187,9 @@ Token *lex(File *src) {
                     file_next(src);
                 } else if (isdigit(c)) {
                     tokens[i++] = read_number(src);
+                } else if (isalpha(c) || c == '_') {
+                    tokens[i++] = read_ident(src);
+                    file_next(src);
                 } else {
                     char *ch = malloc(sizeof(char));
                     snprintf(ch, sizeof(char), "%c", c);
