@@ -232,7 +232,7 @@ int eval(Sexpr *sexpr) {
 
 int main() {
     char cwd[PATH_MAX];
-    if (getcwd(cwd, sizeof(cwd)) == NULL) {
+    if (!getcwd(cwd, sizeof(cwd))) {
         perror("getcwd() error");
         return 1;
     }
