@@ -111,7 +111,7 @@ char *token_to_str(Token *self) {
     const char *tok_type_str = TOKEN_TYPE_STR[self->type];
     char *tok_str = malloc(sizeof("Token { Type: , Lit:  }")+sizeof(tok_type_str)+sizeof(self->lit));
     snprintf(tok_str, sizeof(tok_str), "Token { Type: %s, Lit: %s }", tok_type_str, self->lit);
-    printf("%s\n", tok_type_str);
+//    printf("%s %s\n", tok_type_str, tok_str);
     return tok_str;
 }
 
@@ -152,7 +152,9 @@ Token read_ident(File *src) {
         ident += c;
         file_next(src);
     }
-    return (strcmp(ident, TOKEN_TYPE_STR[LET]) != 0) ? new_token(LET, "let") : new_token(IDENT, ident);
+    return (strcmp(ident, TOKEN_TYPE_STR[LET]) != 0)
+        ? new_token(LET, (char *) TOKEN_TYPE_STR[LET])
+        : new_token(IDENT, ident);
 }
 
 Token *lex(File *src) {
@@ -160,34 +162,34 @@ Token *lex(File *src) {
     int c;
     int i = 0;
     while ((c = file_peek(src)) != EOF) {
-        printf("char: %c\n", c);
+//        printf("char: %c\n", c);
         switch (c) {
             case '+':
-                tokens[i++] = new_token(ADD, TOKEN_TYPE_STR[ADD]);
+                tokens[i++] = new_token(ADD, (char *) TOKEN_TYPE_STR[ADD]);
                 file_next(src);
                 break;
             case '-':
-                tokens[i++] = new_token(SUB, TOKEN_TYPE_STR[SUB]);
+                tokens[i++] = new_token(SUB, (char *) TOKEN_TYPE_STR[SUB]);
                 file_next(src);
                 break;
             case '*':
-                tokens[i++] = new_token(MUL, TOKEN_TYPE_STR[MUL]);
+                tokens[i++] = new_token(MUL, (char *) TOKEN_TYPE_STR[MUL]);
                 file_next(src);
                 break;
             case '/':
-                tokens[i++] = new_token(QUO, TOKEN_TYPE_STR[QUO]);
+                tokens[i++] = new_token(QUO, (char *) TOKEN_TYPE_STR[QUO]);
                 file_next(src);
                 break;
             case '%':
-                tokens[i++] = new_token(MOD, TOKEN_TYPE_STR[MOD]);
+                tokens[i++] = new_token(MOD, (char *) TOKEN_TYPE_STR[MOD]);
                 file_next(src);
                 break;
             case '(':
-                tokens[i++] = new_token(LPAREN, TOKEN_TYPE_STR[LPAREN]);
+                tokens[i++] = new_token(LPAREN, (char *) TOKEN_TYPE_STR[LPAREN]);
                 file_next(src);
                 break;
             case ')':
-                tokens[i++] = new_token(RPAREN, TOKEN_TYPE_STR[RPAREN]);
+                tokens[i++] = new_token(RPAREN, (char *) TOKEN_TYPE_STR[RPAREN]);
                 file_next(src);
                 break;
             default:
@@ -251,10 +253,10 @@ int main() {
     }
     snprintf(cwd, sizeof(cwd), "%s", "../examples/simple.lic");
     File *file = new_file(cwd);
-    lex(file);
-//    Token* tokens = lex(file);
-//    for (int i = 0; i < sizeof(*tokens); i++) {
-//        printf("%s\n", token_to_str(&tokens[i]));
-//    }
+//    lex(file);
+    Token* tokens = lex(file);
+    for (int i = 0; i < sizeof(*tokens); i++) {
+        printf("%s\n", token_to_str(&tokens[i]));
+    }
     return 0;
 }
