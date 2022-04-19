@@ -165,38 +165,49 @@ Token *lex(File *src) {
             case '+':
                 tokens[i++] = new_token(ADD, TOKEN_TYPE_STR[ADD]);
                 file_next(src);
+                break;
             case '-':
                 tokens[i++] = new_token(SUB, TOKEN_TYPE_STR[SUB]);
                 file_next(src);
+                break;
             case '*':
                 tokens[i++] = new_token(MUL, TOKEN_TYPE_STR[MUL]);
                 file_next(src);
+                break;
             case '/':
                 tokens[i++] = new_token(QUO, TOKEN_TYPE_STR[QUO]);
                 file_next(src);
+                break;
             case '%':
                 tokens[i++] = new_token(MOD, TOKEN_TYPE_STR[MOD]);
                 file_next(src);
+                break;
             case '(':
                 tokens[i++] = new_token(LPAREN, TOKEN_TYPE_STR[LPAREN]);
                 file_next(src);
+                break;
             case ')':
                 tokens[i++] = new_token(RPAREN, TOKEN_TYPE_STR[RPAREN]);
                 file_next(src);
+                break;
             default:
                 if (is_whitespace(c)) {
                     file_next(src);
+                    break;
                 } else if (isdigit(c)) {
                     tokens[i++] = read_number(src);
-//                    file_next(src);
+                    file_next(src);
+                    break;
                 } else if (isalpha(c) || c == '_') {
                     tokens[i++] = read_ident(src);
                     file_next(src);
+                    break;
                 } else {
                     char *ch = malloc(sizeof(char));
                     snprintf(ch, sizeof(char), "%c", c);
                     tokens[i] = new_token(ILLEGAL, ch);
                     file_next(src);
+                    break;
                 }
         }
     }
