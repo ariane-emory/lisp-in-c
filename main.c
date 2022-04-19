@@ -10,7 +10,7 @@
 // Helpers
 //=================================================================
 
-const unsigned long MAX_TOKENS = 10000;
+const unsigned int MAX_TOKENS = 10000;
 
 typedef struct {
     FILE *file;
@@ -98,7 +98,8 @@ static const char* TOKEN_TYPE_STR[] = {
         [QUO] = "/",
         [MOD] = "%",
         [LPAREN] = "(",
-        [RPAREN] = ")"
+        [RPAREN] = ")",
+        [LET] = "let"
 };
 
 typedef struct {
@@ -151,7 +152,7 @@ Token read_ident(File *src) {
         ident += c;
         file_next(src);
     }
-    return new_token(IDENT, ident);
+    return (strcmp(ident, TOKEN_TYPE_STR[LET]) != 0) ? new_token(LET, "let") : new_token(IDENT, ident);
 }
 
 Token *lex(File *src) {
@@ -187,6 +188,7 @@ Token *lex(File *src) {
                     file_next(src);
                 } else if (isdigit(c)) {
                     tokens[i++] = read_number(src);
+//                    file_next(src);
                 } else if (isalpha(c) || c == '_') {
                     tokens[i++] = read_ident(src);
                     file_next(src);
