@@ -108,10 +108,20 @@ typedef struct {
 } Token;
 
 char *token_to_str(Token *self) {
-    const char *tok_type_str = TOKEN_TYPE_STR[self->type];
-    char *tok_str = malloc(sizeof("Token { Type: , Lit:  }")+sizeof(tok_type_str)+sizeof(self->lit));
-    snprintf(tok_str, sizeof(tok_str), "Token { Type: %s, Lit: %s }", tok_type_str, self->lit);
-//    printf("%s %s\n", tok_type_str, tok_str);
+    static char str_tmp[256];
+    snprintf(
+            str_tmp,
+            256,
+            "Token { Type: %s, Lit: %s }",
+            TOKEN_TYPE_STR[self->type],
+            self->lit);
+
+    char *tok_str = calloc(
+            strlen(str_tmp) + 1,
+            sizeof(char));
+
+    strcpy(tok_str, str_tmp);
+
     return tok_str;
 }
 
@@ -132,7 +142,7 @@ bool is_whitespace(int c) {
 
 Token read_number(File *src) {
     int c;
-    char *n = malloc(4*sizeof(char));
+    char *n = calloc(4, sizeof(char));
     while ((isdigit(c = file_peek(src)))) {
         n += c;
         file_next(src);
@@ -143,7 +153,7 @@ Token read_number(File *src) {
 Token read_ident(File *src) {
     int c;
     int len = 8;
-    char *ident = malloc(len*sizeof(char));
+    char *ident = calloc(len, sizeof(char));
     while (isalnum(c = file_peek(src) || c == '_')) {
         if (strlen(ident) >= len) {
             len *= 2;
@@ -158,7 +168,7 @@ Token read_ident(File *src) {
 }
 
 Token *lex(File *src) {
-    Token *tokens = malloc(MAX_TOKENS * sizeof(Token));
+    Token *tokens = calloc(MAX_TOKENS, sizeof(Token));
     int c;
     int i = 0;
     while ((c = file_peek(src)) != EOF) {
@@ -205,9 +215,7 @@ Token *lex(File *src) {
                     file_next(src);
                     break;
                 } else {
-                    char *ch = malloc(sizeof(char));
-                    snprintf(ch, sizeof(char), "%c", c);
-                    tokens[i] = new_token(ILLEGAL, ch);
+                    tokens[i] = new_token(ILLEGAL, (char*) c);
                     file_next(src);
                     break;
                 }
