@@ -57,7 +57,7 @@ int file_next(File *self) {
     return fgetc(self->file);
 }
 
-int file_peek(File *self) {
+char file_peek(File *self) {
     int c;
     c = fgetc(self->file);
     ungetc(c, self->file);
@@ -141,35 +141,37 @@ bool is_whitespace(int c) {
 }
 
 Token read_number(File *src) {
-    int c;
+    char c;
+    int i = 0;
     char *n = calloc(4, sizeof(char));
     while ((isdigit(c = file_peek(src)))) {
-        n += c;
+        n[i++] = c;
         file_next(src);
     }
     return new_token(INT, n);
 }
 
 Token read_ident(File *src) {
-    int c;
-    int len = 8;
-    char *ident = calloc(len, sizeof(char));
-    while (isalnum(c = file_peek(src) || c == '_')) {
-        if (strlen(ident) >= len) {
-            len *= 2;
-            ident = (char *) realloc(ident, len*sizeof(char));
+    char c;
+    int i = 0;
+    char ident[256];
+    while (isalnum(c = file_peek(src)) || c == '_') {
+        printf("while\n");
+        if (strlen(ident) >= 256) {
+            return new_token(ILLEGAL, (char *) TOKEN_TYPE_STR[ILLEGAL]);
         }
-        ident += c;
+        ident[i++] = c;
+        printf("ident: %s\n", ident);
         file_next(src);
     }
-    return (strcmp(ident, TOKEN_TYPE_STR[LET]) != 0)
+    return (strcmp(ident, TOKEN_TYPE_STR[LET]) == 0)
         ? new_token(LET, (char *) TOKEN_TYPE_STR[LET])
         : new_token(IDENT, ident);
 }
 
 Token *lex(File *src) {
     Token *tokens = calloc(MAX_TOKENS, sizeof(Token));
-    int c;
+    char c;
     int i = 0;
     while ((c = file_peek(src)) != EOF) {
 //        printf("char: %c\n", c);
@@ -208,14 +210,12 @@ Token *lex(File *src) {
                     break;
                 } else if (isdigit(c)) {
                     tokens[i++] = read_number(src);
-                    file_next(src);
                     break;
                 } else if (isalpha(c) || c == '_') {
                     tokens[i++] = read_ident(src);
-                    file_next(src);
                     break;
                 } else {
-                    tokens[i] = new_token(ILLEGAL, (char*) c);
+                    tokens[i] = new_token(ILLEGAL, c);
                     file_next(src);
                     break;
                 }
@@ -259,7 +259,7 @@ int main() {
         perror("getcwd() error");
         return 1;
     }
-    snprintf(cwd, sizeof(cwd), "%s", "../examples/simple.lic");
+    snprintf(cwd, PATH_MAX*sizeof(char), "%s", "../examples/simple.lic");
     File *file = new_file(cwd);
 //    lex(file);
     Token* tokens = lex(file);
