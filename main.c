@@ -107,6 +107,13 @@ typedef struct {
     char *lit;
 } Token;
 
+Token new_token(TokenType type, char *lit) {
+    Token tok;
+    tok.type = type;
+    tok.lit = lit;
+    return tok;
+}
+
 char *token_to_str(Token *self) {
     static char str_tmp[256];
     snprintf(
@@ -123,13 +130,6 @@ char *token_to_str(Token *self) {
     strcpy(tok_str, str_tmp);
 
     return tok_str;
-}
-
-Token new_token(TokenType type, char *lit) {
-    Token tok;
-    tok.type = type;
-    tok.lit = lit;
-    return tok;
 }
 
 //=================================================================
@@ -156,12 +156,11 @@ Token read_ident(File *src) {
     int idx = 0;
     char ident[256];
     while (isalnum(c = file_peek(src)) || c == '_') {
-//        printf("while\n");
         if (strlen(ident) >= 256) {
             return new_token(ILLEGAL, (char *) TOKEN_TYPE_STR[ILLEGAL]);
         }
         ident[idx++] = c;
-//        printf("ident: %s\n", ident);
+        printf("ident: %s\n", ident);
         file_next(src);
     }
     return (strcmp(ident, TOKEN_TYPE_STR[LET]) == 0)
@@ -215,7 +214,7 @@ Token *lex(File *src) {
                     tokens[idx++] = read_ident(src);
                     break;
                 } else {
-                    tokens[idx] = new_token(ILLEGAL, c);
+                    tokens[idx] = new_token(ILLEGAL, &c);
                     file_next(src);
                     break;
                 }
