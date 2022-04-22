@@ -115,7 +115,7 @@ Token new_token(TokenType type, char *lit) {
 }
 
 char *token_to_str(Token *self) {
-    static char str_tmp[256];
+    static char str_tmp[256] = "";
     snprintf(
             str_tmp,
             256,
@@ -123,9 +123,7 @@ char *token_to_str(Token *self) {
             TOKEN_TYPE_STR[self->type],
             self->lit);
 
-    char *tok_str = calloc(
-            strlen(str_tmp) + 1,
-            sizeof(char));
+    char *tok_str = calloc(strlen(str_tmp) + 1,sizeof(char));
 
     strcpy(tok_str, str_tmp);
 
@@ -154,18 +152,19 @@ Token read_number(File *src) {
 Token read_ident(File *src) {
     char c;
     int idx = 0;
-    char ident[256];
+    char ident[256] = "";
     while (isalnum(c = file_peek(src)) || c == '_') {
         if (strlen(ident) >= 256) {
             return new_token(ILLEGAL, (char *) TOKEN_TYPE_STR[ILLEGAL]);
         }
         ident[idx++] = c;
-        printf("ident: %s\n", ident);
         file_next(src);
     }
+    char *id = calloc(strlen(ident) + 1,sizeof(char));
+    strcpy(id, ident);
     return (strcmp(ident, TOKEN_TYPE_STR[LET]) == 0)
         ? new_token(LET, (char *) TOKEN_TYPE_STR[LET])
-        : new_token(IDENT, ident);
+        : new_token(IDENT, id);
 }
 
 Token *lex(File *src) {
@@ -173,7 +172,6 @@ Token *lex(File *src) {
     char c;
     int idx = 0;
     while ((c = file_peek(src)) != EOF) {
-//        printf("char: %c\n", c);
         switch (c) {
             case '+':
                 tokens[idx++] = new_token(ADD, (char *) TOKEN_TYPE_STR[ADD]);
@@ -237,7 +235,15 @@ typedef enum {
 //=================================================================
 
 Sexpr parse(Token *tokens) {
+    int idx = 0;
+    while (tokens[idx].type != TOK_EOF) {
+        printf("%s\n", token_to_str(&tokens[idx++]));
+    }
     return Atom;
+}
+
+Sexpr parse_atom() {
+    return List;
 }
 
 //=================================================================
@@ -260,10 +266,10 @@ int main() {
     }
     snprintf(cwd, PATH_MAX*sizeof(char), "%s", "../examples/simple.lic");
     File *file = new_file(cwd);
-//    lex(file);
     Token* tokens = lex(file);
-    for (int idx = 0; idx < sizeof(*tokens); idx++) {
-        printf("%s\n", token_to_str(&tokens[idx]));
+    int idx = 0;
+    while (tokens[idx].type != TOK_EOF) {
+        printf("%s\n", token_to_str(&tokens[idx++]));
     }
     return 0;
 }
