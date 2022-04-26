@@ -179,7 +179,6 @@ Token read_number(File *src) {
 Token read_ident(File *src) {
     int idx = 0;
     char ident[256] = "";
-//    char c = file_peek(src);
     char c;
     while (isalnum(c = file_peek(src)) || c == '_') {
         if (strlen(ident) >= 256) {
@@ -196,54 +195,57 @@ Token read_ident(File *src) {
 }
 
 Token *lex(File *src) {
-    Token *tokens = calloc(MAX_TOKENS, sizeof(Token));
+    Token t[MAX_TOKENS];
     char c;
     int idx = 0;
     while ((c = file_peek(src)) != EOF) {
-        printf("char: %c\n", c);
+//        printf("char: %c\n", c);
         switch (c) {
             case '+':
-                tokens[idx++] = new_token(ADD, (char *) TOKEN_TYPE_STR[ADD]);
+                t[idx++] = new_token(ADD, (char *) TOKEN_TYPE_STR[ADD]);
                 file_next(src);
                 break;
             case '-':
-                tokens[idx++] = new_token(SUB, (char *) TOKEN_TYPE_STR[SUB]);
+                t[idx++] = new_token(SUB, (char *) TOKEN_TYPE_STR[SUB]);
                 file_next(src);
                 break;
             case '*':
-                tokens[idx++] = new_token(MUL, (char *) TOKEN_TYPE_STR[MUL]);
+                t[idx++] = new_token(MUL, (char *) TOKEN_TYPE_STR[MUL]);
                 file_next(src);
                 break;
             case '/':
-                tokens[idx++] = new_token(QUO, (char *) TOKEN_TYPE_STR[QUO]);
+                t[idx++] = new_token(QUO, (char *) TOKEN_TYPE_STR[QUO]);
                 file_next(src);
                 break;
             case '%':
-                tokens[idx++] = new_token(MOD, (char *) TOKEN_TYPE_STR[MOD]);
+                t[idx++] = new_token(MOD, (char *) TOKEN_TYPE_STR[MOD]);
                 file_next(src);
                 break;
             case '(':
-                tokens[idx++] = new_token(LPAREN, (char *) TOKEN_TYPE_STR[LPAREN]);
+                t[idx++] = new_token(LPAREN, (char *) TOKEN_TYPE_STR[LPAREN]);
                 file_next(src);
                 break;
             case ')':
-                tokens[idx++] = new_token(RPAREN, (char *) TOKEN_TYPE_STR[RPAREN]);
+                t[idx++] = new_token(RPAREN, (char *) TOKEN_TYPE_STR[RPAREN]);
                 file_next(src);
                 break;
             default:
                 if (is_whitespace(c)) {
                     file_next(src);
                 } else if (isdigit(c)) {
-                    tokens[idx++] = read_number(src);
+                    t[idx++] = read_number(src);
                 } else if (isalpha(c) || c == '_') {
-                    tokens[idx++] = read_ident(src);
+                    t[idx++] = read_ident(src);
                 } else {
-                    tokens[idx] = new_token(ILLEGAL, &c);
+                    t[idx] = new_token(ILLEGAL, &c);
                     file_next(src);
                 }
                 break;
         }
     }
+    Token *tokens = calloc(idx+1, sizeof(Token));
+    memcpy(tokens, t, (idx+1)*sizeof(Token));
+
     return tokens;
 }
 
