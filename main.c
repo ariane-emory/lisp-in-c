@@ -352,12 +352,16 @@ Object *parse_list(Token *tokens, int pos) {
     return list;
 }
 
+Object *parse_expr() {
+    return NULL;
+}
+
 Object *parse(Token *tokens) {
     int idx = 0;
     int obj_idx = 0;
     Object objs[MAX_OBJECTS];
     while (tokens[idx++].type != TOK_EOF) {
-        printf("%s\n", token_to_str(&tokens[idx++]));
+        printf("%s\n", token_to_str(&tokens[idx-1]));
         Token tok = tokens[idx-1];
         switch (tok.type) {
             case IDENT:
@@ -367,6 +371,7 @@ Object *parse(Token *tokens) {
             case QUO:
             case MOD:
                 objs[obj_idx++] = *new_symbol(tok.lit);
+                printf("obj: %s\n", objs[obj_idx-1]);
                 break;
             case INT:
                 objs[obj_idx++] = *new_number(strtol(tok.lit, NULL, 10));
