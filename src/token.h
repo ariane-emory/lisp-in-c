@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-const unsigned int MAX_TOKENS = 10000;
+const unsigned int MAX_TOKENS;
 
 typedef enum TokenType {
     TOK_EOF,

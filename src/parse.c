@@ -1,5 +1,7 @@
 #include "parse.h"
 
+const unsigned int MAX_OBJECTS = 10000;
+
 //Object *parse_atom(Token *tokens, int pos) {
 //    int idx = pos;
 //    while (tokens[idx].type != TOK_EOF) {

@@ -18,6 +18,6 @@ Object *new_symbol(char *name) {
     return obj;
 }
 
-char *ast_to_str(Object *ast) {
-
-}
+//char *ast_to_str(Object *ast) {
+//
+//}

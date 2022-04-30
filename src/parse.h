@@ -4,7 +4,7 @@
 #include "token.h"
 #include "ast.h"
 
-const unsigned int MAX_OBJECTS = 10000;
+const unsigned int MAX_OBJECTS;
 
 Object *parse(TokenStream *tokens);
 

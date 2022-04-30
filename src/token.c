@@ -1,5 +1,7 @@
 #include "token.h"
 
+const unsigned int MAX_TOKENS = 10000;
+
 Token new_token(TokenType type, char *lit) {
     Token tok;
     tok.type = type;
