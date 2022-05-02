@@ -2,10 +2,15 @@ CC = gcc
 
 SRC  = $(wildcard src/*.c)
 OBJ  = $(SRC:.c=.o)
-BIN = bin
+BIN = lisp-in-c
 
-all:
-	$(CC) -o $(BIN)/lisp-in-c $(OBJ)
+all: $(BIN)
+
+%.o: %.c
+	$(CC) -c $< -o $@ $(CFLAGS)
+
+$(BIN): $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS)
 
 clean:
 	rm -rf $(BIN) $(OBJ)
