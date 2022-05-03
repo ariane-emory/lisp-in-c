@@ -37,5 +37,5 @@ Token *tok_next(TokenStream *self) {
 }
 
 Token *tok_peek(TokenStream *self) {
-    return &self->tokens[1+self->pos++];
+    return &self->tokens[self->pos+1];
 }
