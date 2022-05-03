@@ -1,13 +1,13 @@
 CC = gcc
 
 SRC  = $(wildcard src/*.c)
-OBJ  = $(SRC:.c=.o)
+OBJ  = $(patsubst src/%.c, obj/%.o, $(SRC))
 BIN = lisp-in-c
 
 all: $(BIN)
 
-%.o: %.c
-	$(CC) -c $< -o $@ $(CFLAGS)
+obj/%.o: src/%.c
+	$(CC) -c -std=c99 $< -o $@ $(CFLAGS)
 
 $(BIN): $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
