@@ -2,10 +2,10 @@
 #include "file.h"
 #include "token.h"
 #include "lex.h"
-#include "ast.h"
-#include "parse.h"
-#include "gc.h"
-#include "eval.h"
+// #include "ast.h"
+// #include "parse.h"
+// #include "gc.h"
+// #include "eval.h"
 
 int main() {
     File *file = open_file("examples/test.lic");
@@ -17,6 +17,5 @@ int main() {
     }
 //    Object *ast = parse(tokens);
 //    printf(ast_to_str(ast));
-
     return 0;
 }

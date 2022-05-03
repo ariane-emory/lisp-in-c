@@ -1,6 +1,6 @@
 #include "parse.h"
 
-const unsigned int MAX_OBJECTS = 10000;
+static const unsigned int MAX_OBJECTS = 10000;
 
 //Object *parse_atom(Token *tokens, int pos) {
 //    int idx = pos;
