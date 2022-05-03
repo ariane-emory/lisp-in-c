@@ -88,7 +88,7 @@ TokenStream *lex(File *src) {
                 break;
         }
     }
-    t[idx+1] = new_token(TOK_EOF, (char *) TOKEN_TYPE_STR[EOF]);
+    t[++idx] = new_token(TOK_EOF, (char *) TOKEN_TYPE_STR[EOF]);
     Token *tokens = calloc(idx+1, sizeof(Token));
     memcpy(tokens, t, (idx+1)*sizeof(Token));
     return new_token_stream(tokens);
