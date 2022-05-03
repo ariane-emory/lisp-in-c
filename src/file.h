@@ -5,6 +5,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <assert.h>
 
 #if __linux__
   #include <linux/limits.h>

@@ -1,19 +1,16 @@
 #include "file.h"
 
-char* mystrcat(char* dest, char* src)
+void mystrcat(char* dest, char* src)
 {
-     while (*dest) dest++;
-     while (*dest++ = *src++);
-     return --dest;
+    while (*dest) dest++;
+    while (*dest++ = *src++);
+    return;
 }
 
 File *open_file(char* filename) {
     char path[PATH_MAX];
-    if (!getcwd(path, sizeof(path))) {
-        perror("getcwd() error");
-        exit(1);
-    }
-    mystrcat(path, "/");
+    *path = 0;
+    mystrcat("./", filename);
     mystrcat(path, filename);
 
     File *f = calloc(1, sizeof(File));
