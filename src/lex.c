@@ -46,9 +46,6 @@ TokenStream *lex(File *src) {
     while ((c = file_peek(src)) != EOF) {
 //        printf("char: %c\n", c);
         switch (c) {
-            case EOF:
-                t[idx] = new_token(TOK_EOF, (char *) TOKEN_TYPE_STR[EOF]);
-                break;
             case '+':
                 t[idx++] = new_token(ADD, (char *) TOKEN_TYPE_STR[ADD]);
                 file_next(src);
@@ -91,6 +88,7 @@ TokenStream *lex(File *src) {
                 break;
         }
     }
+    t[idx+1] = new_token(TOK_EOF, (char *) TOKEN_TYPE_STR[EOF]);
     Token *tokens = calloc(idx+1, sizeof(Token));
     memcpy(tokens, t, (idx+1)*sizeof(Token));
     return new_token_stream(tokens);
