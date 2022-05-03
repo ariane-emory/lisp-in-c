@@ -5,7 +5,12 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <linux/limits.h>
+
+#if __linux__
+  #include <linux/limits.h>
+#else
+  #include <limits.h>
+#endif
 
 typedef struct {
     FILE *file;
