@@ -11,7 +11,6 @@ int main() {
     File *file = open_file("examples/test.lic");
     TokenStream *stream = lex(file);
     close_file(file);
-    int idx = 0;
     while (tok_peek(stream)->type != TOK_EOF) {
         printf("%s\n", token_to_str(tok_next(stream)));
     }

@@ -7,7 +7,7 @@ BIN = lisp-in-c
 all: $(BIN)
 
 obj/%.o: src/%.c
-	$(CC) -c -std=c99 Wall $< -o $@ $(CFLAGS)
+	$(CC) -c -std=c99 -Wall $< -o $@ $(CFLAGS)
 
 $(BIN): $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
