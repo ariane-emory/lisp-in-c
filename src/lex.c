@@ -10,14 +10,14 @@ Token read_number(File *src) {
     char n[31] = "";
     while ((isdigit(c = file_peek(src)))) {
         if (strlen(n) >= 31) {
-            return new_token(ILLEGAL, (char *) TOKEN_TYPE_STR[ILLEGAL]);
+            return new_token(TOK_ILLEGAL, (char *) TOKEN_TYPE_STR[TOK_ILLEGAL]);
         }
         n[idx++] = c;
         file_next(src);
     }
     char *num = calloc(31, sizeof(char));
     strcpy(num, n);
-    return new_token(INT, num);
+    return new_token(TOK_INT, num);
 }
 
 Token read_ident(File *src) {
@@ -26,16 +26,16 @@ Token read_ident(File *src) {
     char c;
     while (isalnum(c = file_peek(src)) || c == '_') {
         if (strlen(ident) >= 256) {
-            return new_token(ILLEGAL, (char *) TOKEN_TYPE_STR[ILLEGAL]);
+            return new_token(TOK_ILLEGAL, (char *) TOKEN_TYPE_STR[TOK_ILLEGAL]);
         }
         ident[idx++] = c;
         file_next(src);
     }
     char *id = calloc(strlen(ident) + 1,sizeof(char));
     strcpy(id, ident);
-    return (strcmp(ident, TOKEN_TYPE_STR[LET]) == 0)
-           ? new_token(LET, (char *) TOKEN_TYPE_STR[LET])
-           : new_token(IDENT, id);
+    return (strcmp(ident, TOKEN_TYPE_STR[TOK_LET]) == 0)
+           ? new_token(TOK_LET, (char *) TOKEN_TYPE_STR[TOK_LET])
+           : new_token(TOK_IDENT, id);
 }
 
 TokenStream *lex(File *src) {
@@ -47,31 +47,31 @@ TokenStream *lex(File *src) {
 //        printf("char: %c\n", c);
         switch (c) {
             case '+':
-                t[idx++] = new_token(ADD, (char *) TOKEN_TYPE_STR[ADD]);
+                t[idx++] = new_token(TOK_ADD, (char *) TOKEN_TYPE_STR[TOK_ADD]);
                 file_next(src);
                 break;
             case '-':
-                t[idx++] = new_token(SUB, (char *) TOKEN_TYPE_STR[SUB]);
+                t[idx++] = new_token(TOK_SUB, (char *) TOKEN_TYPE_STR[TOK_SUB]);
                 file_next(src);
                 break;
             case '*':
-                t[idx++] = new_token(MUL, (char *) TOKEN_TYPE_STR[MUL]);
+                t[idx++] = new_token(TOK_MUL, (char *) TOKEN_TYPE_STR[TOK_MUL]);
                 file_next(src);
                 break;
             case '/':
-                t[idx++] = new_token(QUO, (char *) TOKEN_TYPE_STR[QUO]);
+                t[idx++] = new_token(TOK_QUO, (char *) TOKEN_TYPE_STR[TOK_QUO]);
                 file_next(src);
                 break;
             case '%':
-                t[idx++] = new_token(MOD, (char *) TOKEN_TYPE_STR[MOD]);
+                t[idx++] = new_token(TOK_MOD, (char *) TOKEN_TYPE_STR[TOK_MOD]);
                 file_next(src);
                 break;
             case '(':
-                t[idx++] = new_token(LPAREN, (char *) TOKEN_TYPE_STR[LPAREN]);
+                t[idx++] = new_token(TOK_LPAREN, (char *) TOKEN_TYPE_STR[TOK_LPAREN]);
                 file_next(src);
                 break;
             case ')':
-                t[idx++] = new_token(RPAREN, (char *) TOKEN_TYPE_STR[RPAREN]);
+                t[idx++] = new_token(TOK_RPAREN, (char *) TOKEN_TYPE_STR[TOK_RPAREN]);
                 file_next(src);
                 break;
             default:
@@ -82,7 +82,7 @@ TokenStream *lex(File *src) {
                 } else if (isalpha(c) || c == '_') {
                     t[idx++] = read_ident(src);
                 } else {
-                    t[idx] = new_token(ILLEGAL, &c);
+                    t[idx] = new_token(TOK_ILLEGAL, &c);
                     file_next(src);
                 }
                 break;

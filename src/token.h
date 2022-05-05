@@ -9,36 +9,36 @@ static const unsigned int MAX_TOKENS;
 
 typedef enum TokenType {
     TOK_EOF,
-    ILLEGAL,
+    TOK_ILLEGAL,
 
-    IDENT,
-    INT,
+    TOK_IDENT,
+    TOK_INT,
 
-    ADD,
-    SUB,
-    MUL,
-    QUO,
-    MOD,
+    TOK_ADD,
+    TOK_SUB,
+    TOK_MUL,
+    TOK_QUO,
+    TOK_MOD,
 
-    LPAREN,
-    RPAREN,
+    TOK_LPAREN,
+    TOK_RPAREN,
 
-    LET
+    TOK_LET
 } TokenType;
 
 static const char* TOKEN_TYPE_STR[] = {
         [TOK_EOF] = "<EOF>",
-        [ILLEGAL] = "<ILLEGAL>",
-        [IDENT] = "<IDENT>",
-        [INT] = "<INT>",
-        [ADD] = "+",
-        [SUB] = "-",
-        [MUL] = "*",
-        [QUO] = "/",
-        [MOD] = "%",
-        [LPAREN] = "(",
-        [RPAREN] = ")",
-        [LET] = "let"
+        [TOK_ILLEGAL] = "<ILLEGAL>",
+        [TOK_IDENT] = "<IDENT>",
+        [TOK_INT] = "<INT>",
+        [TOK_ADD] = "+",
+        [TOK_SUB] = "-",
+        [TOK_MUL] = "*",
+        [TOK_QUO] = "/",
+        [TOK_MOD] = "%",
+        [TOK_LPAREN] = "(",
+        [TOK_RPAREN] = ")",
+        [TOK_LET] = "let"
 };
 
 typedef struct {
@@ -56,6 +56,6 @@ typedef struct {
 
 TokenStream *new_token_stream(Token *tokens);
 Token *tok_next(TokenStream *self);
-Token *tok_peek(TokenStream *self);
+Token *(tok_peek(TokenStream *self));
 
 #endif
