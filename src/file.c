@@ -10,7 +10,7 @@ void mystrcat(char* dest, char* src)
 File *open_file(char* filename) {
     char path[PATH_MAX];
     *path = 0;
-    mystrcat("./", filename);
+    mystrcat(path, "./");
     mystrcat(path, filename);
 
     File *f = calloc(1, sizeof(File));
