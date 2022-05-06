@@ -7,15 +7,15 @@ bool is_whitespace(char c) {
 Token read_number(File *src) {
     char c;
     int idx = 0;
-    char n[31] = "";
+    char n[32] = "";
     while ((isdigit(c = file_peek(src)))) {
-        if (strlen(n) >= 31) {
+        if (strlen(n) == 31) {
             return new_token(TOK_ILLEGAL, (char *) TOKEN_TYPE_STR[TOK_ILLEGAL]);
         }
         n[idx++] = c;
         file_next(src);
     }
-    char *num = calloc(31, sizeof(char));
+    char *num = calloc(32, sizeof(char));
     strcpy(num, n);
     return new_token(TOK_INT, num);
 }
@@ -25,7 +25,7 @@ Token read_ident(File *src) {
     char ident[256] = "";
     char c;
     while (isalnum(c = file_peek(src)) || c == '_') {
-        if (strlen(ident) >= 256) {
+        if (strlen(ident) == 255) {
             return new_token(TOK_ILLEGAL, (char *) TOKEN_TYPE_STR[TOK_ILLEGAL]);
         }
         ident[idx++] = c;

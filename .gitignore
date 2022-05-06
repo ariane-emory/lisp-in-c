@@ -1,3 +1,4 @@
 *.o
 obj/
 lisp-in-c
+.vscode
