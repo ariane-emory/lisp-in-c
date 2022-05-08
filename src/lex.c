@@ -32,6 +32,7 @@ Token read_number(File *src) {
     LOGCALLOC(num, char, (strlen(n)));
     
     strcpy(num, n);
+
     Token tok = new_token(TOK_INT, num);
 
     OUT();
