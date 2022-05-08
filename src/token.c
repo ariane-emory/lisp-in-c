@@ -10,15 +10,15 @@ Token new_token(TokenType type, char *lit) {
 }
 
 char *token_to_str(Token *self) {
-    static char str_tmp[256] = "";
+    static char str_tmp[500] = "";
     snprintf(
             str_tmp,
-            256,
+            500,
             "Token { Type: %s, Lit: %s }",
             TOKEN_TYPE_STR[self->type],
             self->lit);
 
-    char *tok_str = calloc(strlen(str_tmp) + 1,sizeof(char));
+    char *tok_str = calloc(strlen(str_tmp) + 1, sizeof(char));
 
     strcpy(tok_str, str_tmp);
 

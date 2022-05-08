@@ -9,12 +9,17 @@
 
 int main() {
     File *file = open_file("examples/test.lic");
-    TokenStream *stream = lex(file);
-    close_file(file);
-    while (tok_peek(stream)->type != TOK_EOF) {
-        printf("%s\n", token_to_str(tok_next(stream)));
+    char c;
+    while ((c = file_next(file) != EOF)) {
+        printf("%c\n", c);
+        // putchar(c);
     }
-//    Object *ast = parse(tokens);
-//    printf(ast_to_str(ast));
+    // TokenStream *stream = lex(file);
+    // close_file(file);
+    // while (tok_peek(stream)->type != TOK_EOF) {
+    //     printf("%s\n", token_to_str(tok_next(stream)));
+    // }
+    // Object *ast = parse(tokens);
+    // printf(ast_to_str(ast));
     return 0;
 }

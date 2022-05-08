@@ -10,11 +10,14 @@ Token read_number(File *src) {
     char n[32] = "";
     while ((isdigit(c = file_peek(src)))) {
         if (strlen(n) == 31) {
-            return new_token(TOK_ILLEGAL, (char *) TOKEN_TYPE_STR[TOK_ILLEGAL]);
+            char *lit = calloc(2, sizeof(char));
+            lit[0] = c;
+            return new_token(TOK_ILLEGAL, lit);
         }
         n[idx++] = c;
         file_next(src);
     }
+    n[idx] = 0;
     char *num = calloc(32, sizeof(char));
     strcpy(num, n);
     return new_token(TOK_INT, num);
@@ -26,7 +29,9 @@ Token read_ident(File *src) {
     char c;
     while (isalnum(c = file_peek(src)) || c == '_') {
         if (strlen(ident) == 255) {
-            return new_token(TOK_ILLEGAL, (char *) TOKEN_TYPE_STR[TOK_ILLEGAL]);
+            char *lit = calloc(2, sizeof(char));
+            lit[0] = c;
+            return new_token(TOK_ILLEGAL, lit);
         }
         ident[idx++] = c;
         file_next(src);
@@ -82,7 +87,9 @@ TokenStream *lex(File *src) {
                 } else if (isalpha(c) || c == '_') {
                     t[idx++] = read_ident(src);
                 } else {
-                    t[idx] = new_token(TOK_ILLEGAL, &c);
+                    char *lit = calloc(2, sizeof(char));
+                    lit[0] = c;
+                    t[idx] = new_token(TOK_ILLEGAL, lit);
                     file_next(src);
                 }
                 break;
