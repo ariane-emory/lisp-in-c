@@ -7,7 +7,10 @@ BIN = lisp-in-c
 
 all: $(BIN)
 
-obj/%.o: src/%.c
+obj:
+	mkdir $@
+
+obj/%.o: src/%.c obj
 	$(CC) -c $< -o $@ $(CFLAGS)
 
 $(BIN): $(OBJ)

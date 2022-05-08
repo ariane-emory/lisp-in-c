@@ -6,13 +6,19 @@ Token new_token(TokenType type, char *lit) {
     Token tok;
     tok.type = type;
     tok.lit = lit;
+    printf("Created '%s'.\n", token_to_str(&tok));
     return tok;
 }
 
 char *token_to_str(Token *self) {
     static char str_tmp[256] = "";
+
+    printf("TYPE = %u\n", self->type);
+    printf("TYPE_STR = %s\n", TOKEN_TYPE_STR[self->type]);
+    printf("LIT  = %p\n", self->lit);
+    
     snprintf(
-            str_tmp,
+        str_tmp,
             256,
             "Token { Type: %s, Lit: %s }",
             TOKEN_TYPE_STR[self->type],
