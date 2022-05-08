@@ -17,7 +17,7 @@
         snprintf(buf, BUF_LEN, __VA_ARGS__);                                    \
         UNDENT();                                                               \
         printf("%s\n", buf);                                                    \
-        }
+    }
 
 #define IN()                                                                    \
     INFO("Called %s", __FUNCTION__);                                            \
