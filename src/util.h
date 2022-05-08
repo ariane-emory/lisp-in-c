@@ -38,7 +38,7 @@
 
 #define LOGCALLOC(name, type, count)                                            \
     name = calloc(count, sizeof(type));                                         \
-    INFO("Allocating %zu bytes for %zu objs of size %zu.", (long)((count) * (sizeof(type))), (long)(count), (long)(sizeof(type))); \
+    INFO("Allocating %zu bytes for %zu " ## a ## " of size %zu.", (long)((count) * (sizeof(type))), (long)(count), (long)(sizeof(type))); \
 
 #define LINE()                                                                  \
     for (size_t ix = 0; ix < 80; ix++) printf("-");                             \
