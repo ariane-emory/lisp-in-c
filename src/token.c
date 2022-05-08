@@ -19,10 +19,10 @@ char *token_to_str(Token *self) {
     
     snprintf(
         str_tmp,
-            256,
-            "Token { Type: %s, Lit: %s }",
-            TOKEN_TYPE_STR[self->type],
-            self->lit);
+        256,
+        "Token { Type: %s, Lit: %s }",
+        TOKEN_TYPE_STR[self->type],
+        self->lit);
 
     char *tok_str = calloc(strlen(str_tmp) + 1,sizeof(char));
 
