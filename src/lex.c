@@ -121,12 +121,11 @@ TokenStream *lex(File *src) {
         INFO("T %zu => %s", ix, tmp);
         free(tmp);
     }
-
     
     TokenStream * tokens;
     LOGCALLOC(tokens, TokenStream, 1);
     LOGCALLOC(tokens->tokens, idx, sizeof(Token));
-    memcpy(tokens, t, (idx+0)*sizeof(Token));
+    memcpy(tokens->tokens, t, (idx+0)*sizeof(Token));
 
     OUT();
     return tokens; // new_token_stream(tokens);

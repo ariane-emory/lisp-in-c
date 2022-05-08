@@ -17,6 +17,8 @@ int main() {
 
     fflush(stdout);
     //printf("Blaah\n");
+
+    LINE();
     
     while (tok_peek(stream)->type != TOK_EOF) {
         printf("%s\n", token_to_str(tok_next(stream)));

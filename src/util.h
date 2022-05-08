@@ -40,6 +40,10 @@
     name = calloc(count, sizeof(type));                                         \
     INFO("Allocating %zu bytes for %zu objs of size %zu.", (long)((count) * (sizeof(type))), (long)(count), (long)(sizeof(type))); \
 
+#define LINE()                                                                  \
+    for (size_t ix = 0; ix < 80; ix++) printf("-");                             \
+    printf("\n");
+
 extern char indent;
 //extern char buf[BUF_LEN];
 
