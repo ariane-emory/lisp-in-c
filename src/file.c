@@ -13,8 +13,6 @@ File *open_file(char* filename) {
     mystrcat(path, "./");
     mystrcat(path, filename);
 
-    printf("%s\n", path);
-
     File *f = calloc(1, sizeof(File));
     f->file = fopen(path, "r");
     if (!f->file) {

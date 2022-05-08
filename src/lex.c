@@ -89,13 +89,13 @@ TokenStream *lex(File *src) {
                 } else {
                     char *lit = calloc(2, sizeof(char));
                     lit[0] = c;
-                    t[idx] = new_token(TOK_ILLEGAL, lit);
+                    t[idx++] = new_token(TOK_ILLEGAL, lit);
                     file_next(src);
                 }
                 break;
         }
     }
-    t[++idx] = new_token(TOK_EOF, (char *) TOKEN_TYPE_STR[EOF]);
+    t[idx] = new_token(TOK_EOF, (char *) TOKEN_TYPE_STR[EOF]);
     Token *tokens = calloc(idx+1, sizeof(Token));
     memcpy(tokens, t, (idx+1)*sizeof(Token));
     return new_token_stream(tokens);
