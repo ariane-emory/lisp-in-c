@@ -29,7 +29,7 @@ Token read_number(File *src) {
     n[idx] = 0;
     
     char * num;
-    LOGCALLOC(num, char, (strlen(n)));
+    LOGCALLOC(num, char, (1 + strlen(n)));
     
     strcpy(num, n);
 
