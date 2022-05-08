@@ -31,4 +31,4 @@ test: clean all
 	./lisp-in-c
 
 debug: clean all
-	lldb ./lisp-in-c
+	$(GDB) ./lisp-in-c
