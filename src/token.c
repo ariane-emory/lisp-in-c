@@ -1,7 +1,24 @@
 #include "token.h"
 #include "util.h"
+#include <stdbool.h>
 
 static const unsigned int MAX_TOKENS = 10000;
+
+bool token_equal(Token * left, Token * right) {
+    IN();
+    bool r = ((left->type == right->type) && (left->lit == right->lit));
+    OUT();
+    return r;
+}
+
+void token_copy(Token * dest, Token * src) {
+    IN();
+    dest->type = src->type;
+    INFO("Copy from lit of length %u", strlen(src->lit));
+    LOGCALLOC(dest->lit, char, (1 + strlen(src->lit)));
+    strcpy(dest->lit, src->lit);
+    OUT();
+}
 
 Token new_token(TokenType type, char *lit) {
     IN();

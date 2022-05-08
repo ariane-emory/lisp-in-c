@@ -15,17 +15,16 @@ int main() {
     TokenStream *stream = lex(file);
     close_file(file);
 
-    fflush(stdout);
-    //printf("Blaah\n");
-
     LINE();
-    
-    while (tok_peek(stream)->type != TOK_EOF) {
-        char * tstr = token_to_str(tok_next(stream));
-        INFO("%s", tstr);
-        free(tstr);
-    }
 
+    if (false) {
+        while (tok_peek(stream)->type != TOK_EOF) {
+            char * tstr = token_to_str(tok_next(stream));
+            INFO("%s", tstr);
+            free(tstr);
+        }
+    }
+    
 //    Object *ast = parse(tokens);
 //    printf(ast_to_str(ast));
 

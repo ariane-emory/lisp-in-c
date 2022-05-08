@@ -115,17 +115,16 @@ TokenStream *lex(File *src) {
     }
     
     t[idx] = new_token(TOK_EOF, (char *) TOKEN_TYPE_STR[TOK_EOF]);
-    
-    for (size_t ix = 0; ix < idx; ix++) {
-        char * tmp = token_to_str(&t[ix]);
-        INFO("T %zu => %s", ix, tmp);
-        free(tmp);
-    }
-    
+
+    INFO("IX is %u", idx);
     TokenStream * tokens;
     LOGCALLOC(tokens, TokenStream, 1);
-    LOGCALLOC(tokens->tokens, idx, sizeof(Token));
-    memcpy(tokens->tokens, t, (idx+0)*sizeof(Token));
+    LOGCALLOC(tokens->tokens, Token, 1 + idx);
+
+    for (size_t ix = 0; ix < (1 + idx); ix++)
+        token_copy(&tokens->tokens[ix], &t[ix]);
+    
+    //memcpy(tokens->tokens, t, sizeof(Token) * (1 + idx));
 
     OUT();
     return tokens; // new_token_stream(tokens);

@@ -20,12 +20,12 @@
     }
 
 #define IN()                                                                    \
-    INFO("Called %s.", __FUNCTION__);                                            \
+    INFO("%s {", __FUNCTION__);                                                 \
     indent++;                                                                   
 
 #define OUT()                                                                   \
     indent--;                                                                   \
-    INFO("Return from %s.", __FUNCTION__);
+    INFO("}");
 
 #define TAG()                                                                   \
     {                                                                           \
