@@ -2,16 +2,26 @@
 #include "util.h"
 
 bool is_whitespace(char c) {
-    return c == ' ' || c == '\t' || c == '\f' || c == '\v';
+    IN();
+
+    bool r = c == ' ' || c == '\t' || c == '\f' || c == '\v';
+
+    OUT();
+    return r;
 }
 
 Token read_number(File *src) {
+    IN();
+    
     char c;
     int idx = 0;
     char n[32] = "";
     while ((isdigit(c = file_peek(src)))) {
         if (strlen(n) == 31) {
-            return new_token(TOK_ILLEGAL, (char *) TOKEN_TYPE_STR[TOK_ILLEGAL]);
+            Token tok = tok;
+
+            OUT();
+            return tok; 
         }
         n[idx++] = c;
         file_next(src);
@@ -19,25 +29,36 @@ Token read_number(File *src) {
     n[idx] = 0;
     char *num = calloc(32, sizeof(char));
     strcpy(num, n);
-    return new_token(TOK_INT, num);
+    Token tok = new_token(TOK_INT, num);
+
+    OUT();
+    return tok;
 }
 
 Token read_ident(File *src) {
+    IN();
+    
     int idx = 0;
     char ident[256] = "";
     char c;
     while (isalnum(c = file_peek(src)) || c == '_') {
         if (strlen(ident) == 255) {
-            return new_token(TOK_ILLEGAL, (char *) TOKEN_TYPE_STR[TOK_ILLEGAL]);
+            Token tok =  new_token(TOK_ILLEGAL, (char *) TOKEN_TYPE_STR[TOK_ILLEGAL]);
+
+            OUT();
+            return tok;
         }
         ident[idx++] = c;
         file_next(src);
     }
     char *id = calloc(strlen(ident) + 1,sizeof(char));
     strcpy(id, ident);
-    return (strcmp(ident, TOKEN_TYPE_STR[TOK_LET]) == 0)
-           ? new_token(TOK_LET, (char *) TOKEN_TYPE_STR[TOK_LET])
-           : new_token(TOK_IDENT, id);
+    Token tok = (strcmp(ident, TOKEN_TYPE_STR[TOK_LET]) == 0)
+        ? new_token(TOK_LET, (char *) TOKEN_TYPE_STR[TOK_LET])
+        : new_token(TOK_IDENT, id);
+
+    OUT();
+    return tok;
 }
 
 TokenStream *lex(File *src) {
@@ -103,13 +124,8 @@ TokenStream *lex(File *src) {
 
     
     TokenStream * tokens;
-    LCALLOC(tokens, TokenStream, 1);
-    
-    LCALLOC(tokens->tokens, idx, sizeof(Token));
-
-
-
-    
+    LOGCALLOC(tokens, TokenStream, 1);
+    LOGCALLOC(tokens->tokens, idx, sizeof(Token));
     memcpy(tokens, t, (idx+0)*sizeof(Token));
 
     OUT();

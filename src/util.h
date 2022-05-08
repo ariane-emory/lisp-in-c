@@ -7,9 +7,9 @@
 #define TAG_LEN 50
 
 #define INDENT() for (size_t ix = 0; ix < 2 * indent; ix++) printf(" ");
-#define UNDENT() for (size_t ix = 0; ix < 2 * indent; ix++) printf("\b");
+#define UNDENT() ;; // for (size_t ix = 0; ix < 2 * indent; ix++) printf("\b");
 
-#define INFO(...)                                                          \
+#define INFO(...)                                                               \
     {                                                                           \
         INDENT();                                                               \
         TAG();                                                                  \
@@ -20,7 +20,7 @@
     }
 
 #define IN()                                                                    \
-    INFO("Called %s", __FUNCTION__);                                            \
+    INFO("Called %s.", __FUNCTION__);                                            \
     indent++;                                                                   
 
 #define OUT()                                                                   \
@@ -36,12 +36,9 @@
         printf(fmt, tag);                                                       \
     }
 
-#define LOGCALLOC(x, y)                                                         \
-    (printf("Allocating %zu bytes for %zu objs of size %zu.\n", (long)((x) * (y)), (long)(x), (long)(y)), calloc((x), (y)))
-
-#define LCALLOC(name, type, count)                                        \
-     name = calloc(count, sizeof(type));                            \
-     INFO("Allocating %zu bytes for %zu objs of size %zu.", (long)((count) * (sizeof(type))), (long)(count), (long)(sizeof(type))); \
+#define LOGCALLOC(name, type, count)                                            \
+    name = calloc(count, sizeof(type));                                         \
+    INFO("Allocating %zu bytes for %zu objs of size %zu.", (long)((count) * (sizeof(type))), (long)(count), (long)(sizeof(type))); \
 
 extern char indent;
 //extern char buf[BUF_LEN];

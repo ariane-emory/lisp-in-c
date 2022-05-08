@@ -9,6 +9,8 @@
 // #include "eval.h"
 
 int main() {
+    IN();
+    
     File *file = open_file("examples/test.lic");
     TokenStream *stream = lex(file);
     close_file(file);
@@ -19,9 +21,10 @@ int main() {
     while (tok_peek(stream)->type != TOK_EOF) {
         printf("%s\n", token_to_str(tok_next(stream)));
     }
-    INFO("Done.")
+
 //    Object *ast = parse(tokens);
 //    printf(ast_to_str(ast));
 
+    OUT();
     return 0;
 }
