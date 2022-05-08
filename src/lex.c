@@ -28,8 +28,8 @@ Token read_number(File *src) {
     }
     n[idx] = 0;
     
-    char *num = calloc(32, sizeof(char));
-    LOGCALLOC(num, char, 32);
+    char * num;
+    LOGCALLOC(num, char, (strlen(n)));
     
     strcpy(num, n);
     Token tok = new_token(TOK_INT, num);
