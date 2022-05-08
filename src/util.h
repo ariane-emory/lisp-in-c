@@ -40,9 +40,8 @@
     (printf("Allocating %zu bytes for %zu objs of size %zu.\n", (long)((x) * (y)), (long)(x), (long)(y)), calloc((x), (y)))
 
 #define LCALLOC(name, type, count)                                        \
-    type * name = calloc(count, sizeof(type));                            \
-    INFO("Allocating %zu bytes for %zu objs of size %zu.\n", (long)((count) * (sizeof(type))), (long)(count), (long)(sizeof(type))); \
-
+     name = calloc(count, sizeof(type));                            \
+     INFO("Allocating %zu bytes for %zu objs of size %zu.\n", (long)((count) * (sizeof(type))), (long)(count), (long)(sizeof(type))); \
 
 extern char indent;
 //extern char buf[BUF_LEN];

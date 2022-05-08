@@ -102,7 +102,9 @@ TokenStream *lex(File *src) {
     }
 
     
-    TokenStream * tokens = LOGCALLOC(1, sizeof(TokenStream));
+    TokenStream * tokens;
+    LCALLOC(tokens, TokenStream, 1);
+    
     tokens->tokens = LOGCALLOC(idx+0, sizeof(Token));
 
 
