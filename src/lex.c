@@ -105,7 +105,7 @@ TokenStream *lex(File *src) {
     TokenStream * tokens;
     LCALLOC(tokens, TokenStream, 1);
     
-    tokens->tokens = LOGCALLOC(idx+0, sizeof(Token));
+    LCALLOC(tokens->tokens, idx, sizeof(Token));
 
 
 

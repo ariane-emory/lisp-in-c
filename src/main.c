@@ -2,6 +2,7 @@
 #include "file.h"
 #include "token.h"
 #include "lex.h"
+#include "util.h"
 // #include "ast.h"
 // #include "parse.h"
 // #include "gc.h"
@@ -12,10 +13,13 @@ int main() {
     TokenStream *stream = lex(file);
     close_file(file);
 
-    /* while (tok_peek(stream)->type != TOK_EOF) { */
-    /*     printf("%s\n", token_to_str(tok_next(stream))); */
-    /* } */
-
+    fflush(stdout);
+    //printf("Blaah\n");
+    
+    while (tok_peek(stream)->type != TOK_EOF) {
+        printf("%s\n", token_to_str(tok_next(stream)));
+    }
+    INFO("Done.")
 //    Object *ast = parse(tokens);
 //    printf(ast_to_str(ast));
 

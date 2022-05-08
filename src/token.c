@@ -11,7 +11,7 @@ Token new_token(TokenType type, char *lit) {
     tok.lit = lit;
 
     char * tmp = token_to_str(&tok);
-    INFO("Created '%s'.\n", token_to_str(&tok));
+    INFO("Created '%s.", tmp);
     free(tmp);
 
     OUT();

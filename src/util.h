@@ -4,17 +4,17 @@
 #include <stdio.h>
 
 #define BUF_LEN 256
-#define TAG_LEN 40
+#define TAG_LEN 50
 
 #define INDENT() for (size_t ix = 0; ix < 2 * indent; ix++) printf(" ");
 #define UNDENT() for (size_t ix = 0; ix < 2 * indent; ix++) printf("\b");
 
-#define INFO(fmt, ...)                                                          \
+#define INFO(...)                                                          \
     {                                                                           \
         INDENT();                                                               \
         TAG();                                                                  \
         char buf[BUF_LEN];                                                      \
-        snprintf(buf, BUF_LEN, fmt, __VA_ARGS__);                               \
+        snprintf(buf, BUF_LEN, __VA_ARGS__);                                    \
         UNDENT();                                                               \
         printf("%s\n", buf);                                                    \
         }
@@ -41,7 +41,7 @@
 
 #define LCALLOC(name, type, count)                                        \
      name = calloc(count, sizeof(type));                            \
-     INFO("Allocating %zu bytes for %zu objs of size %zu.\n", (long)((count) * (sizeof(type))), (long)(count), (long)(sizeof(type))); \
+     INFO("Allocating %zu bytes for %zu objs of size %zu.", (long)((count) * (sizeof(type))), (long)(count), (long)(sizeof(type))); \
 
 extern char indent;
 //extern char buf[BUF_LEN];
