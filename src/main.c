@@ -15,9 +15,9 @@ int main() {
     TokenStream *stream = lex(file);
     close_file(file);
 
-    LINE();
-
     if (false) {
+        LINE();
+        
         while (tok_peek(stream)->type != TOK_EOF) {
             char * tstr = token_to_str(tok_next(stream));
             INFO("%s", tstr);
