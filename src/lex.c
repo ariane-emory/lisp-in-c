@@ -120,8 +120,10 @@ TokenStream *lex(File *src) {
     LOGCALLOC(tokens, TokenStream, 1);
     LOGCALLOC(tokens->tokens, Token, 1 + idx);
 
-    for (size_t ix = 0; ix < (1 + idx); ix++)
+    for (size_t ix = 0; ix < (1 + idx); ix++) {
+        INFO("Copying item %zu.", ix);
         token_copy(&tokens->tokens[ix], &t[ix]);
+    }
     
     //memcpy(tokens->tokens, t, sizeof(Token) * (1 + idx));
 

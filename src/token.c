@@ -15,7 +15,7 @@ void token_copy(Token * dest, Token * src) {
     IN();
     
     dest->type = src->type;
-    INFO("Copy from lit of length %u", strlen(src->lit));
+    INFO("Copy from lit of length %zu", strlen(src->lit));
     LOGCALLOC(dest->lit, char, (1 + strlen(src->lit)));
     strcpy(dest->lit, src->lit);
 
