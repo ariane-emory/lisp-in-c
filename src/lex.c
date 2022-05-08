@@ -113,10 +113,9 @@ TokenStream *lex(File *src) {
                 break;
         }
     }
-    
+        
     t[idx] = new_token(TOK_EOF, (char *) TOKEN_TYPE_STR[TOK_EOF]);
 
-    INFO("IX is %u", idx);
     TokenStream * tokens;
     LOGCALLOC(tokens, TokenStream, 1);
     LOGCALLOC(tokens->tokens, Token, 1 + idx);
