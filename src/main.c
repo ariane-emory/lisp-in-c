@@ -21,7 +21,9 @@ int main() {
     LINE();
     
     while (tok_peek(stream)->type != TOK_EOF) {
-        printf("%s\n", token_to_str(tok_next(stream)));
+        char * tstr = token_to_str(tok_next(stream));
+        INFO("%s", tstr);
+        free(tstr);
     }
 
 //    Object *ast = parse(tokens);
