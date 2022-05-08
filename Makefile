@@ -1,11 +1,9 @@
-CC = gcc
-CFLAGS = -std=c99 -Wall -g -Wno-parentheses
-
-SRC  = $(wildcard src/*.c)
-OBJ  = $(patsubst src/%.c, obj/%.o, $(SRC))
-BIN = lisp-in-c
-
-UNAME := $(shell uname)
+CC     = gcc
+CFLAGS = -std=c99 -Wall -g -Wno-parentheses -Wno-unused-const-variable
+SRC    = $(wildcard src/*.c)
+OBJ    = $(patsubst src/%.c, obj/%.o, $(SRC))
+BIN    = lisp-in-c
+UNAME  = $(shell uname)
 
 ifeq ($(UNAME), Darwin)
 	GDB=lldb

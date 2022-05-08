@@ -1,22 +1,31 @@
 #include "token.h"
+#include "util.h"
 
 static const unsigned int MAX_TOKENS = 10000;
 
 Token new_token(TokenType type, char *lit) {
+    IN();
+
     Token tok;
     tok.type = type;
     tok.lit = lit;
-    printf("Created '%s'.\n", token_to_str(&tok));
+
+    char * tmp = token_to_str(&tok);
+    INFO("Created '%s'.\n", token_to_str(&tok));
+    free(tmp);
+
+    OUT();
     return tok;
 }
 
 char *token_to_str(Token *self) {
+    IN();
+    INFO("TYPE = %u", self->type);
+    INFO("TYPE_STR = %s", TOKEN_TYPE_STR[self->type]);
+    INFO("LIT  = %p", self->lit);
+    
     static char str_tmp[256] = "";
 
-    printf("TYPE = %u\n", self->type);
-    printf("TYPE_STR = %s\n", TOKEN_TYPE_STR[self->type]);
-    printf("LIT  = %p\n", self->lit);
-    
     snprintf(
         str_tmp,
         256,
@@ -28,6 +37,7 @@ char *token_to_str(Token *self) {
 
     strcpy(tok_str, str_tmp);
 
+    OUT();
     return tok_str;
 }
 
@@ -41,6 +51,7 @@ TokenStream *new_token_stream(Token *tokens) {
 Token *tok_next(TokenStream *self) {
     return &self->tokens[self->pos++];
 }
+
 
 Token *tok_peek(TokenStream *self) {
     return &self->tokens[self->pos+1];
