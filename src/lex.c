@@ -100,9 +100,13 @@ TokenStream *lex(File *src) {
         INFO("T %zu => %s", ix, tmp);
         free(tmp);
     }
-            
+
+    
     TokenStream * tokens = LOGCALLOC(1, sizeof(TokenStream));
     tokens->tokens = LOGCALLOC(idx+0, sizeof(Token));
+
+
+
     
     memcpy(tokens, t, (idx+0)*sizeof(Token));
 
