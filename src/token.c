@@ -5,10 +5,7 @@
 static const unsigned int MAX_TOKENS = 10000;
 
 bool token_equal(Token * left, Token * right) {
-    IN();
-    bool r = ((left->type == right->type) && (left->lit == right->lit));
-    OUT();
-    return r;
+    return ((left->type == right->type) && (left->lit == right->lit));
 }
 
 void token_copy(Token * dest, Token * src) {
