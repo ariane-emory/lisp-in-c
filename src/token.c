@@ -15,8 +15,8 @@ void token_copy(Token * dest, Token * src) {
     IN();
     
     INFO("Copy token @ %p to %p", src, dest);
-    dest->type = src->type;
     INFO("Copy token of type %s", TOKEN_TYPE_STR[src->type]);
+    dest->type = src->type;
     INFO("Copy from lit of length %zu", strlen(src->lit));
     LOGCALLOC(dest->lit, char, (1 + strlen(src->lit)));
     strcpy(dest->lit, src->lit);
@@ -83,5 +83,5 @@ Token * tok_next(TokenStream *self) {
 }
 
 Token * tok_peek(TokenStream *self) {
-    return self->tokens[self->pos+1];
+    return self->tokens[self->pos];
 }

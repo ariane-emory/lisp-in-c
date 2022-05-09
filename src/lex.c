@@ -53,6 +53,11 @@ Token * read_ident(File *src) {
 TokenStream *lex(File *src) {
     IN();
 
+#define PUSH_TOKEN(index, token)                                                \
+    t[index] = token;                                                           \
+    INFO("Pushed token %p to index %u", token, index);                          \
+    index++
+    
     Token * t[MAX_TOKENS];
     memset(t, 0, MAX_TOKENS*sizeof(Token*));
     char c;
@@ -60,58 +65,61 @@ TokenStream *lex(File *src) {
     while ((c = file_peek(src)) != EOF) {
         INFO("char: %c", c);
         switch (c) {
-            case '+':
-                t[idx++] = new_token(TOK_ADD, (char *) TOKEN_TYPE_STR[TOK_ADD]);
+        case '+':
+            PUSH_TOKEN(idx, new_token(TOK_ADD, (char *) TOKEN_TYPE_STR[TOK_ADD]));
+            file_next(src);
+            break;
+        case '-':
+            PUSH_TOKEN(idx, new_token(TOK_SUB, (char *) TOKEN_TYPE_STR[TOK_SUB]));
+            file_next(src);
+            break;
+        case '*':
+            PUSH_TOKEN(idx, new_token(TOK_MUL, (char *) TOKEN_TYPE_STR[TOK_MUL]));
+            file_next(src);
+            break;
+        case '/':
+            PUSH_TOKEN(idx, new_token(TOK_QUO, (char *) TOKEN_TYPE_STR[TOK_QUO]));
+            file_next(src);
+            break;
+        case '%':
+            PUSH_TOKEN(idx, new_token(TOK_MOD, (char *) TOKEN_TYPE_STR[TOK_MOD]));
+            file_next(src);
+            break;
+        case '(':
+            PUSH_TOKEN(idx, new_token(TOK_LPAREN, (char *) TOKEN_TYPE_STR[TOK_LPAREN]));
+            file_next(src);
+            break;
+        case ')':
+            PUSH_TOKEN(idx, new_token(TOK_RPAREN, (char *) TOKEN_TYPE_STR[TOK_RPAREN]));
+            file_next(src);
+            break;
+        default:
+            if (is_whitespace(c)) {
                 file_next(src);
-                break;
-            case '-':
-                t[idx++] = new_token(TOK_SUB, (char *) TOKEN_TYPE_STR[TOK_SUB]);
+            } else if (isdigit(c)) {
+                PUSH_TOKEN(idx, read_number(src));
+            } else if (isalpha(c) || c == '_') {
+                PUSH_TOKEN(idx, read_ident(src));
+            } else {
+                char * buf;
+                LOGCALLOC(buf, char, 2);
+                snprintf(buf, 2, "%c", c);
+                PUSH_TOKEN(idx, new_token(TOK_ILLEGAL, buf));
                 file_next(src);
-                break;
-            case '*':
-                t[idx++] = new_token(TOK_MUL, (char *) TOKEN_TYPE_STR[TOK_MUL]);
-                file_next(src);
-                break;
-            case '/':
-                t[idx++] = new_token(TOK_QUO, (char *) TOKEN_TYPE_STR[TOK_QUO]);
-                file_next(src);
-                break;
-            case '%':
-                t[idx++] = new_token(TOK_MOD, (char *) TOKEN_TYPE_STR[TOK_MOD]);
-                file_next(src);
-                break;
-            case '(':
-                t[idx++] = new_token(TOK_LPAREN, (char *) TOKEN_TYPE_STR[TOK_LPAREN]);
-                file_next(src);
-                break;
-            case ')':
-                t[idx++] = new_token(TOK_RPAREN, (char *) TOKEN_TYPE_STR[TOK_RPAREN]);
-                file_next(src);
-                break;
-            default:
-                if (is_whitespace(c)) {
-                    file_next(src);
-                } else if (isdigit(c)) {
-                    t[idx++] = read_number(src);
-                } else if (isalpha(c) || c == '_') {
-                    t[idx++] = read_ident(src);
-                } else {
-                    t[idx++] = new_token(TOK_ILLEGAL, &c);
-                    file_next(src);
-                }
-                break;
+            }
+            break;
         }
     }
     
-    t[idx] = new_token(TOK_EOF, (char *) TOKEN_TYPE_STR[TOK_EOF]);
+    PUSH_TOKEN(idx, new_token(TOK_EOF, (char *) TOKEN_TYPE_STR[TOK_EOF]));
 
     TokenStream * tokens;
     LOGCALLOC(tokens, TokenStream, 1);
-    LOGCALLOC(tokens->tokens, Token, 1 + idx);
+    LOGCALLOC(tokens->tokens, Token, idx);
 
-    for (size_t ix = 0; ix < (1 + idx); ix++) {
+    for (size_t ix = 0; ix < idx; ix++) {
         INFO("Copying item %zu.", ix);
-        LOGCALLOC(*tokens->tokens[ix], Token , 1);
+        LOGCALLOC(tokens->tokens[ix], Token , 1);
         token_copy(tokens->tokens[ix], t[ix]);
     }
     
@@ -119,4 +127,5 @@ TokenStream *lex(File *src) {
 
     OUT();
     return tokens; // new_token_stream(tokens);
+#undef PUSH_TOKEN
 }
