@@ -2,8 +2,7 @@
 #include "util.h"
 
 bool is_whitespace(char c) {
-    bool r = c == ' ' || c == '\t' || c == '\f' || c == '\v';
-    return r;
+    return c == ' ' || c == '\t' || c == '\f' || c == '\v';
 }
 
 Token * read_number(File *src) {
