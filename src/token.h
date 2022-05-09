@@ -57,7 +57,7 @@ typedef struct {
 
 TokenStream *new_token_stream(Token ** tokens);
 Token * tok_next(TokenStream *self);
-Token * tok_peek(TokenStream *self);
+Token * tok_current(TokenStream *self);
 
 bool token_equal(Token * left, Token * right);
 void token_copy(Token * dest, Token * src);

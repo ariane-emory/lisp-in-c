@@ -56,8 +56,8 @@ Object *parse(TokenStream *tokens) {
     int idx = 0;
     int obj_idx = 0;
     Object objs[MAX_OBJECTS];
-    // while (tok_peek(tokens)->type != TOK_EOF) {
-    //     Token tok = *tok_peek(tokens);
+    // while (tok_current(tokens)->type != TOK_EOF) {
+    //     Token tok = *tok_current(tokens);
     //     switch (tok.type) {
     //         case TOK_INT:
     //             objs[obj_idx++] = *new_number(strtol(tok.lit, NULL, 10));

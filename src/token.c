@@ -79,6 +79,6 @@ Token * tok_next(TokenStream *self) {
     return self->tokens[self->pos++];
 }
 
-Token * tok_peek(TokenStream *self) {
+Token * tok_current(TokenStream *self) {
     return self->tokens[self->pos];
 }

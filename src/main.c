@@ -31,7 +31,7 @@ int main() {
         char * tstr = token_to_str(tok_next(stream));
         INFO("%s", tstr);
         free(tstr);        
-    }  while (tok_peek(stream)->type != TOK_EOF);
+    }  while (tok_current(stream)->type != TOK_EOF);
 
 //    Object *ast = parse(tokens);
 //    printf(ast_to_str(ast));
