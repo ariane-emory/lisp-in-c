@@ -12,6 +12,16 @@ int main() {
     IN();
     
     File *file = open_file("examples/test.lic");
+    // char c;
+    // while ((c = file_next(file)) != EOF) {
+    //     putchar(c);
+    // }
+    // FILE *file = fopen("./examples/test.lic", "r");
+    // while (true) {
+    //     int c = fgetc(file);
+    //     if (c == EOF) return 0;
+    //     putchar(c);
+    // }
     TokenStream *stream = lex(file);
     close_file(file);
 

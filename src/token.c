@@ -63,7 +63,7 @@ char *token_to_str(Token *self) {
         TOKEN_TYPE_STR[self->type],
         self->lit);
 
-    char *tok_str = calloc(strlen(str_tmp) + 1,sizeof(char));
+    char *tok_str = calloc(strlen(str_tmp) + 1, sizeof(char));
 
     strcpy(tok_str, str_tmp);
 

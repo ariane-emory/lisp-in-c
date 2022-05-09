@@ -3,7 +3,7 @@
 void mystrcat(char* dest, char* src)
 {
     while (*dest) dest++;
-    while (*dest++ = *src++);
+    while ((*dest++ = *src++));
     return;
 }
 
@@ -58,8 +58,7 @@ char file_next(File *self) {
 }
 
 char file_peek(File *self) {
-    int c;
-    c = fgetc(self->file);
+    int c = fgetc(self->file);
     ungetc(c, self->file);
     return (char) c;
 }
