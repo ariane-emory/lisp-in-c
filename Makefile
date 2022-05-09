@@ -30,3 +30,4 @@ test: clean all
 
 debug: clean all
 	$(GDB) ./lisp-in-c
+
