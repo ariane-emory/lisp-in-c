@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 static const unsigned int MAX_TOKENS;
 
@@ -46,16 +47,19 @@ typedef struct {
     char *lit;
 } Token;
 
-Token new_token(TokenType type, char *lit);
-char *token_to_str(Token *self);
+Token * new_token(TokenType type, char *lit);
+char * token_to_str(Token *self);
 
 typedef struct {
     int pos;
-    Token *tokens;
+    Token ** tokens;
 } TokenStream;
 
-TokenStream *new_token_stream(Token *tokens);
-Token *tok_next(TokenStream *self);
-Token *(tok_peek(TokenStream *self));
+TokenStream *new_token_stream(Token ** tokens);
+Token * tok_next(TokenStream *self);
+Token * tok_current(TokenStream *self);
+
+bool token_equal(Token * left, Token * right);
+void token_copy(Token * dest, Token * src);
 
 #endif

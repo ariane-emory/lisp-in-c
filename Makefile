@@ -1,13 +1,22 @@
-CC = gcc
-CFLAGS = -std=c99 -Wall -g
+CC     = gcc
+CFLAGS = -std=c99 -Wall -g -Wno-parentheses -Wno-unused-const-variable
+SRC    = $(wildcard src/*.c)
+OBJ    = $(patsubst src/%.c, obj/%.o, $(SRC))
+BIN    = lisp-in-c
+UNAME  = $(shell uname)
 
-SRC  = $(wildcard src/*.c)
-OBJ  = $(patsubst src/%.c, obj/%.o, $(SRC))
-BIN = lisp-in-c
+ifeq ($(UNAME), Darwin)
+	GDB=lldb
+else
+	GDB=gdb
+endif
 
 all: $(BIN)
 
-obj/%.o: src/%.c
+obj:
+	mkdir $@
+
+obj/%.o: src/%.c obj
 	$(CC) -c $< -o $@ $(CFLAGS)
 
 $(BIN): $(OBJ)
@@ -15,3 +24,10 @@ $(BIN): $(OBJ)
 
 clean:
 	rm -rf $(BIN) $(OBJ)
+
+test: clean all
+	./lisp-in-c
+
+debug: clean all
+	$(GDB) ./lisp-in-c
+
