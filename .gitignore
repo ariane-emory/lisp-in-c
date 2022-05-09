@@ -2,3 +2,4 @@
 obj/
 lisp-in-c
 .vscode
+.DS_Store
