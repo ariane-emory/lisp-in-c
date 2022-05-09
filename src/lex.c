@@ -55,7 +55,7 @@ TokenStream *lex(File *src) {
 
 #define PUSH_TOKEN(index, token)                                                \
     t[index] = token;                                                           \
-    INFO("Pushed token %p to index %u", token, index);                          \
+    INFO("Pushed token %p to index %u", t[index], index);                       \
     index++
     
     Token * t[MAX_TOKENS];
