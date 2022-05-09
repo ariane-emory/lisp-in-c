@@ -52,7 +52,7 @@ char *token_to_str(Token *self) {
     IN();
     INFO("type = %u", self->type);
     INFO("type_str @ %p = '%s'", TOKEN_TYPE_STR[self->type], TOKEN_TYPE_STR[self->type]);
-    INFO("lit @ %p= '%s' ", self->lit, self->lit);
+    INFO("lit @ %p = '%s' ", self->lit, self->lit);
     
     static char str_tmp[256] = "";
 
