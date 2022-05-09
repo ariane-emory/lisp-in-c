@@ -14,7 +14,9 @@ bool token_equal(Token * left, Token * right) {
 void token_copy(Token * dest, Token * src) {
     IN();
     
+    INFO("Copy token @ %p to %p", src, dest);
     dest->type = src->type;
+    INFO("Copy token of type %s", TOKEN_TYPE_STR[src->type]);
     INFO("Copy from lit of length %zu", strlen(src->lit));
     LOGCALLOC(dest->lit, char, (1 + strlen(src->lit)));
     strcpy(dest->lit, src->lit);
@@ -29,15 +31,17 @@ void token_copy(Token * dest, Token * src) {
     OUT();
 }
 
-Token new_token(TokenType type, char *lit) {
+Token * new_token(TokenType type, char *lit) {
     IN();
 
-    Token tok;
-    tok.type = type;
-    tok.lit = lit;
+    Token * tok;
+    LOGCALLOC(tok, Token, 1);
+    
+    tok->type = type;
+    tok->lit = lit;
 
-    char * tmp = token_to_str(&tok);
-    // INFO("Created '%s.", tmp);
+    char * tmp = token_to_str(tok);
+    INFO("Created '%s' @ %p.", tmp, tmp);
     free(tmp);
 
     OUT();
@@ -67,17 +71,17 @@ char *token_to_str(Token *self) {
     return tok_str;
 }
 
-TokenStream *new_token_stream(Token *tokens) {
+TokenStream * new_token_stream(Token ** tokens) {
     TokenStream *self = calloc(1, sizeof(TokenStream));
     self->pos = 0;
     self->tokens = tokens;
     return self;
 }
 
-Token *tok_next(TokenStream *self) {
-    return &self->tokens[self->pos++];
+Token * tok_next(TokenStream *self) {
+    return self->tokens[self->pos++];
 }
 
-Token *tok_peek(TokenStream *self) {
-    return &self->tokens[self->pos+1];
+Token * tok_peek(TokenStream *self) {
+    return self->tokens[self->pos+1];
 }
