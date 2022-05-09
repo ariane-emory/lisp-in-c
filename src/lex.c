@@ -111,7 +111,7 @@ TokenStream *lex(File *src) {
 
     for (size_t ix = 0; ix < (1 + idx); ix++) {
         INFO("Copying item %zu.", ix);
-        LOGCALLOC(tokens->tokens[ix], Token, 1);
+        LOGCALLOC(*tokens->tokens[ix], Token , 1);
         token_copy(tokens->tokens[ix], t[ix]);
     }
     
