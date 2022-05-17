@@ -2,8 +2,13 @@ CC     = gcc
 CFLAGS = -std=c99 -Wall -g -Wno-parentheses -Wno-unused-const-variable
 SRC    = $(wildcard src/*.c)
 OBJ    = $(patsubst src/%.c, obj/%.o, $(SRC))
-BIN    = lisp-in-c
 UNAME  = $(shell uname)
+
+ifeq ($(OS),Windows_NT)
+	BIN=lisp-in-c.exe
+else
+	BIN=lisp-in-c
+endif
 
 ifeq ($(UNAME), Darwin)
 	GDB=lldb
@@ -26,8 +31,8 @@ clean:
 	rm -rf $(BIN) $(OBJ)
 
 test: clean all
-	./lisp-in-c
+	./$(BIN)
 
 debug: clean all
-	$(GDB) ./lisp-in-c
+	$(GDB) ./$(BIN)
 
