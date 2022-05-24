@@ -23,7 +23,6 @@ int main() {
     //     putchar(c);
     // }
     TokenStream *stream = lex(file);
-    close_file(file);
 
     LINE();
         
@@ -37,5 +36,6 @@ int main() {
 //    printf(ast_to_str(ast));
 
     OUT();
+    close_file(file);
     return 0;
 }
