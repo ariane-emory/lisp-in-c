@@ -13,14 +13,8 @@
   #include <limits.h>
 #endif
 
-typedef struct {
-    FILE *file;
-} File;
-
-File *open_file(char* filename);
-void close_file(File *file);
-char *file_to_str(File *self);
-char file_next(File *self);
-char file_peek(File *self);
+FILE *open_file(char* filename);
+char file_next(FILE *self);
+char file_peek(FILE *self);
 
 #endif

@@ -9,6 +9,6 @@
 #include "file.h"
 #include "token.h"
 
-TokenStream *lex(File *src);
+TokenStream *lex(FILE *src);
 
 #endif

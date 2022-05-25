@@ -1,64 +1,32 @@
 #include "file.h"
 
-void mystrcat(char* dest, char* src)
+void str_concat(char* dest, char* src)
 {
     while (*dest) dest++;
     while ((*dest++ = *src++));
     return;
 }
 
-File *open_file(char* filename) {
+FILE *open_file(char* filename) {
     char path[PATH_MAX];
     *path = 0;
-    mystrcat(path, "./");
-    mystrcat(path, filename);
+    str_concat(path, "./");
+    str_concat(path, filename);
 
-    File *f = calloc(1, sizeof(File));
-    f->file = fopen(path, "r");
-    if (!f->file) {
+    FILE *file = fopen(path, "r");
+    if (!file) {
         printf("Error: file \"%s\" does not exist!", path);
         exit(1);
     }
-    return f;
+    return file;
 }
 
-void close_file(File *file) {
-    fclose(file->file);
-    free(file);
-    file = NULL;
+char file_next(FILE *self) {
+    return (char) fgetc(self);
 }
 
-char *file_to_str(File *self) {
-    char *buffer = NULL;
-    long string_size;
-    unsigned long read_size;
-    FILE *handler = self->file;
-
-    if (handler)
-    {
-        fseek(handler, 0, SEEK_END);
-        string_size = ftell(handler);
-        rewind(handler);
-        buffer = (char*) malloc(sizeof(char) * (string_size + 1) );
-        read_size = fread(buffer, sizeof(char), string_size, handler);
-        buffer[string_size] = '\0';
-        if (string_size != read_size)
-        {
-            free(buffer);
-            buffer = NULL;
-        }
-        fclose(handler);
-    }
-
-    return buffer;
-}
-
-char file_next(File *self) {
-    return (char) fgetc(self->file);
-}
-
-char file_peek(File *self) {
-    int c = fgetc(self->file);
-    ungetc(c, self->file);
+char file_peek(FILE *self) {
+    int c = fgetc(self);
+    ungetc(c, self);
     return (char) c;
 }

@@ -11,7 +11,7 @@
 int main() {
     IN();
     
-    File *file = open_file("examples/test.lic");
+    FILE *file = open_file("examples/test.lic");
     // char c;
     // while ((c = file_next(file)) != EOF) {
     //     putchar(c);
@@ -36,6 +36,6 @@ int main() {
 //    printf(ast_to_str(ast));
 
     OUT();
-    close_file(file);
+    fclose(file);
     return 0;
 }

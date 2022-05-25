@@ -5,7 +5,7 @@ bool is_whitespace(char c) {
     return c == ' ' || c == '\t' || c == '\f' || c == '\v';
 }
 
-Token * read_number(File *src) {
+Token * read_number(FILE *src) {
     IN();
     
     char c;
@@ -28,7 +28,7 @@ Token * read_number(File *src) {
     return tok;
 }
 
-Token * read_ident(File *src) {
+Token * read_ident(FILE *src) {
     IN();
     
     int idx = 0;
@@ -49,7 +49,7 @@ Token * read_ident(File *src) {
     return tok;
 }
 
-TokenStream *lex(File *src) {
+TokenStream *lex(FILE *src) {
     IN();
 
 #define PUSH_TOKEN(index, token)                                                \
