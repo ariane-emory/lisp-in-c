@@ -61,7 +61,7 @@ TokenStream *lex(FILE *src) {
     memset(t, 0, MAX_TOKENS*sizeof(Token*));
     char c;
     int idx = 0;
-    while ((c = file_peek(src)) != EOF) {
+    while ((c = file_peek(src)) != (char)EOF) {
         INFO("char: %c", c);
         switch (c) {
         case '+':
