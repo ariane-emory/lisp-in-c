@@ -36,6 +36,6 @@ int main() {
 //    printf(ast_to_str(ast));
 
     OUT();
-    fclose(file);
+    // fclose(file);
     return 0;
 }

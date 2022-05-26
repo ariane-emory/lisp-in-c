@@ -14,9 +14,7 @@ void token_copy(Token * dest, Token * src) {
     INFO("Copy token @ %p to %p", src, dest);
     INFO("Copy token of type %s", TOKEN_TYPE_STR[src->type]);
     dest->type = src->type;
-    INFO("Copy from lit of length %zu", strlen(src->lit));
-    LOGCALLOC(dest->lit, char, (1 + strlen(src->lit)));
-    strcpy(dest->lit, src->lit);
+    dest->lit = src->lit;
 
     char * dstr = token_to_str(dest);
     char * sstr = token_to_str(src);

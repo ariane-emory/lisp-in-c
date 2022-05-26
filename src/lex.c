@@ -57,8 +57,9 @@ TokenStream *lex(FILE *src) {
     INFO("Pushed token %p to index %u", t[index], index);                       \
     index++
     
-    Token * t[MAX_TOKENS];
-    memset(t, 0, MAX_TOKENS*sizeof(Token*));
+    Token ** t;
+    LOGCALLOC(t, Token *, MAX_TOKENS);
+
     char c;
     int idx = 0;
     while ((c = file_peek(src)) != (char)EOF) {
