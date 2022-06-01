@@ -1,5 +1,5 @@
-CC     = g++
-CXXLAGS = -std=gnu++17 -Wall -g -Wno-parentheses -Wno-unused-const-variable
+CXX     = g++
+CXXLAGS = -std=gnu++17 -Wall -g -Wno-parentheses -Wno-unused-const-variable -fpermissive
 SRC    = $(wildcard src/*.cpp)
 OBJ    = $(patsubst src/%.cpp, obj/%.o, $(SRC))
 UNAME  = $(shell uname)
@@ -22,10 +22,10 @@ obj:
 	mkdir $@
 
 obj/%.o: src/%.cpp obj
-	$(CC) -c $< -o $@ $(CXXLAGS)
+	$(CXX) -c $< -o $@ $(CXXLAGS)
 
 $(BIN): $(OBJ)
-	$(CC) -o $@ $^ $(CXXLAGS)
+	$(CXX) -o $@ $^ $(CXXLAGS)
 
 clean:
 	rm -rf $(BIN) $(OBJ)
