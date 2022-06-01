@@ -1,13 +1,13 @@
-CC     = gcc
-CFLAGS = -std=c99 -Wall -g -Wno-parentheses -Wno-unused-const-variable
-SRC    = $(wildcard src/*.c)
-OBJ    = $(patsubst src/%.c, obj/%.o, $(SRC))
+CC     = g++
+CXXLAGS = -std=gnu++17 -Wall -g -Wno-parentheses -Wno-unused-const-variable
+SRC    = $(wildcard src/*.cpp)
+OBJ    = $(patsubst src/%.cpp, obj/%.o, $(SRC))
 UNAME  = $(shell uname)
 
 ifeq ($(OS),Windows_NT)
-	BIN=lisp-in-c.exe
+	BIN=lisp-in-cpp.exe
 else
-	BIN=lisp-in-c
+	BIN=lisp-in-cpp
 endif
 
 ifeq ($(UNAME), Darwin)
@@ -21,11 +21,11 @@ all: $(BIN)
 obj:
 	mkdir $@
 
-obj/%.o: src/%.c obj
-	$(CC) -c $< -o $@ $(CFLAGS)
+obj/%.o: src/%.cpp obj
+	$(CC) -c $< -o $@ $(CXXLAGS)
 
 $(BIN): $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS)
+	$(CC) -o $@ $^ $(CXXLAGS)
 
 clean:
 	rm -rf $(BIN) $(OBJ)
