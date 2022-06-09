@@ -1,65 +1,53 @@
 #ifndef TOKEN_H
 #define TOKEN_H
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
+#include <string>
+#include <vector>
 
-static const unsigned int MAX_TOKENS;
+typedef std::string string;
 
-typedef enum TokenType {
-    TOK_EOF,
-    TOK_ILLEGAL,
+namespace token {
+	enum class TokenType {
+		Eof,
+		Err,
+		Comment,
 
-    TOK_IDENT,
-    TOK_INT,
+		Ident,
+		Int,
+		String,
+		
+		Add,
+		Sub,
+		Mul,
+		Quo,
+		Mod,
 
-    TOK_ADD,
-    TOK_SUB,
-    TOK_MUL,
-    TOK_QUO,
-    TOK_MOD,
+		LParen,
+		RParen,
 
-    TOK_LPAREN,
-    TOK_RPAREN,
+		Let,
+		Lambda
+	};
 
-    TOK_LET
-} TokenType;
+	class Token {
+		public:
+			TokenType type;
+			string lit;
 
-static const char* TOKEN_TYPE_STR[] = {
-        [TOK_EOF] = "<EOF>",
-        [TOK_ILLEGAL] = "<ILLEGAL>",
-        [TOK_IDENT] = "<IDENT>",
-        [TOK_INT] = "<INT>",
-        [TOK_ADD] = "+",
-        [TOK_SUB] = "-",
-        [TOK_MUL] = "*",
-        [TOK_QUO] = "/",
-        [TOK_MOD] = "%",
-        [TOK_LPAREN] = "(",
-        [TOK_RPAREN] = ")",
-        [TOK_LET] = "let"
-};
+			Token(TokenType type, string lit) 
+				: type(type)
+				, lit(lit)
+				{}
+	};
 
-typedef struct {
-    TokenType type;
-    char *lit;
-} Token;
+	class TokenStream {
+		size_t pos;
+		std::vector<Token> tokens;
 
-Token * new_token(TokenType type, char *lit);
-char * token_to_str(Token *self);
-
-typedef struct {
-    int pos;
-    Token ** tokens;
-} TokenStream;
-
-TokenStream *new_token_stream(Token ** tokens);
-Token * tok_next(TokenStream *self);
-Token * tok_current(TokenStream *self);
-
-bool token_equal(Token * left, Token * right);
-void token_copy(Token * dest, Token * src);
+		public:
+			const Token & peek() const;
+			const Token & next();
+	};
+}
 
 #endif

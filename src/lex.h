@@ -1,14 +1,9 @@
-#ifndef LEX_H
-#define LEX_H
+#ifndef LEXER_H
+#define LEXER_H
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <ctype.h>
-#include "file.h"
+#include <string>
 #include "token.h"
 
-TokenStream *lex(FILE *src);
+token::TokenStream lex(std::string src);
 
 #endif

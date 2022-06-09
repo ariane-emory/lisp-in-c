@@ -7,7 +7,7 @@
     <generated>
       <config projectName="lisp-in-cpp" targetName="test" />
       <config projectName="lisp-in-cpp" targetName="all" />
-      <config projectName="lisp-in-cpp" targetName="lisp-in-cpp.exe" />
+      <config projectName="lisp-in-cpp" targetName="lisp-in-cpp" />
       <config projectName="lisp-in-cpp" targetName="obj" />
       <config projectName="lisp-in-cpp" targetName="debug" />
     </generated>
@@ -19,9 +19,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2929105-c7ee-4bbd-ba17-685d89cfcfea" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/lisp-in-c.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,24 +80,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "last_opened_file_path": "C:/Users/thisi/Repositories/lisp-in-cpp",
-    "nodejs_package_manager_path": "npm"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/chris/Repositories/lisp-in-cpp&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Makefile Application.all">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="lisp-in-cpp" TARGET_NAME="all" CONFIG_NAME="all" version="1" RUN_PATH="lisp-in-cpp.exe">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
@@ -110,7 +103,7 @@
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration name="lisp-in-cpp.exe" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="lisp-in-cpp" TARGET_NAME="lisp-in-cpp.exe" CONFIG_NAME="lisp-in-cpp.exe" version="1">
+    <configuration name="lisp-in-cpp" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="lisp-in-cpp" TARGET_NAME="lisp-in-cpp" CONFIG_NAME="lisp-in-cpp" version="1">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
@@ -128,7 +121,7 @@
     <list>
       <item itemvalue="Makefile Application.all" />
       <item itemvalue="Makefile Application.debug" />
-      <item itemvalue="Makefile Application.lisp-in-cpp.exe" />
+      <item itemvalue="Makefile Application.lisp-in-cpp" />
       <item itemvalue="Makefile Application.obj" />
       <item itemvalue="Makefile Application.test" />
     </list>
@@ -142,6 +135,9 @@
       <option name="presentableId" value="Default" />
       <updated>1654110927001</updated>
       <workItem from="1654110928084" duration="1677000" />
+      <workItem from="1654220523780" duration="621000" />
+      <workItem from="1654238310083" duration="18000" />
+      <workItem from="1654369934242" duration="115000" />
     </task>
     <servers />
   </component>

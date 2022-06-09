@@ -1,1 +1,1 @@
-make clean && make && ./lisp-in-c
+make clean && make && ./lisp-in-cpp
