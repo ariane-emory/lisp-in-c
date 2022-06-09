@@ -1,6 +1,6 @@
 *.o
 obj/
-lisp-in-c
+lisp-in-cpp
 .vscode
 .DS_Store
 *.bak
