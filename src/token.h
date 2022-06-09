@@ -8,51 +8,51 @@ typedef std::string string;
 
 namespace token
 {
-	enum class TokenType
-	{
-		Eof,
-		Err,
-		Comment,
+  enum class TokenType
+  {
+    Eof,
+    Err,
+    Comment,
 
-		Ident,
-		Int,
-		String,
+    Ident,
+    Int,
+    String,
 
-		Add,
-		Sub,
-		Mul,
-		Quo,
-		Mod,
+    Add,
+    Sub,
+    Mul,
+    Quo,
+    Mod,
 
-		LParen,
-		RParen,
+    LParen,
+    RParen,
 
-		Let,
-		Lambda
-	};
+    Let,
+    Lambda
+  };
 
-	class Token
-	{
-	public:
-		TokenType type;
-		string lit;
+  class Token
+  {
+  public:
+    TokenType type;
+    string lit;
 
-		Token(TokenType type, string lit)
-			: type(type),
-			  lit(lit)
-		{
-		}
-	};
+    Token(TokenType type, string lit)
+      : type(type),
+        lit(lit)
+    {
+    }
+  };
 
-	class TokenStream
-	{
-		size_t pos;
-		std::vector<Token> tokens;
+  class TokenStream
+  {
+    size_t pos;
+    std::vector<Token> tokens;
 
-	public:
-		const Token &peek() const;
-		const Token &next();
-	};
+  public:
+    const Token &peek() const;
+    const Token &next();
+  };
 }
 
 #endif

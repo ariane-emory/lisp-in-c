@@ -3,7 +3,8 @@
 
 #include <string>
 #include "token.h"
+#include <fstream>
 
-token::TokenStream lex(std::string src);
+token::TokenStream lex(std::ifstream src);
 
 #endif
