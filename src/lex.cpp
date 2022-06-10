@@ -4,25 +4,25 @@ using namespace token;
 using std::string;
 using std::vector;
 
-Token read_number(std::ifstream src)
+Token read_number(std::ifstream & src)
 {
-  char c;
+  int c;
   string lit = "";
-  while (isdigit(c = src.peek()))
+  while ((! src.eof()) && isdigit(c = src.peek()))
   {
-    lit += c;
+    lit += static_cast<char>(c);
     src.get();
   }
   return Token(TokenType::Number, lit);
 }
 
-Token read_ident(std::ifstream src)
+Token read_ident(std::ifstream & src)
 {
-  char c;
+  int c;
   string lit = "";
-  while (isalnum(c = src.peek()) || c == '_')
+  while ((! src.eof()) && (isalnum(c = src.peek()) || c == '_'))
   {
-    lit += c;
+    lit += static_cast<char>(c);
     src.get();
   }
   return Token(TokenType::Number, lit);
@@ -30,33 +30,41 @@ Token read_ident(std::ifstream src)
 
 TokenStream lex(std::ifstream src)
 {
-  char c;
+  int c;
   vector<Token> tokens;
   TokenStream stream;
-  while ((c = src.peek()))
+  while ((! src.eof()) && (c = src.peek()))
   {
+    putchar(src.peek());
     switch (c)
     {
     case '+':
       tokens.push_back(Token(TokenType::Add, "+"));
+      src.get();
       break;
     case '-':
       tokens.push_back(Token(TokenType::Sub, "-"));
+      src.get();
       break;
     case '*':
       tokens.push_back(Token(TokenType::Mul, "*"));
+      src.get();
       break;
     case '/':
       tokens.push_back(Token(TokenType::Quo, "/"));
+      src.get();
       break;
     case '%':
       tokens.push_back(Token(TokenType::Mod, "%"));
+      src.get();
       break;
     case '(':
       tokens.push_back(Token(TokenType::LParen, "("));
+      src.get();
       break;
     case ')':
       tokens.push_back(Token(TokenType::RParen, ")"));
+      src.get();
       break;
     default:
       if (isspace(c))
@@ -73,7 +81,7 @@ TokenStream lex(std::ifstream src)
       }
       else
       {
-        tokens.push_back(Token(TokenType::Err, string{c}));
+        tokens.push_back(Token(TokenType::Err, string{static_cast<char>(c)}));
       }
       break;
     }

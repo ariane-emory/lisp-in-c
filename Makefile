@@ -1,5 +1,6 @@
+UNAME_S = $(shell uname -s)
 CXX     = g++
-CXXLAGS = -std=gnu++17 -Wall -g -Wno-parentheses -Wno-unused-const-variable -fpermissive
+CXXLAGS = -std=gnu++17 -Wall -g -Wno-parentheses -Wno-unused-const-variable -Wextra	-Wpedantic -Wconversion # -Wshadow
 SRC    = $(wildcard src/*.cpp)
 OBJ    = $(patsubst src/%.cpp, obj/%.o, $(SRC))
 UNAME  = $(shell uname)
@@ -10,7 +11,8 @@ else
 	BIN=lisp-in-cpp
 endif
 
-ifeq ($(UNAME), Darwin)
+ifeq ($(UNAME_S),Darwin)
+	CXX = g++-12
 	GDB=lldb
 else
 	GDB=gdb
