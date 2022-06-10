@@ -4,3 +4,4 @@ lisp-in-cpp
 .vscode
 .DS_Store
 *.bak
+.idea/

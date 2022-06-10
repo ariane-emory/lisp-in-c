@@ -2,10 +2,12 @@
 
 using namespace token;
 
-const Token &TokenStream::peek() const {
+const Token &TokenStream::peek() const
+{
   return this->tokens.at(this->pos);
 }
 
-const Token &TokenStream::next() {
+const Token &TokenStream::next()
+{
   return this->tokens.at(this->pos++);
 }

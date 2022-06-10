@@ -3,8 +3,11 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
-typedef std::string string;
+using std::string;
+using std::ostream;
+using std::vector;
 
 namespace token
 {
@@ -15,7 +18,7 @@ namespace token
     Comment,
 
     Ident,
-    Int,
+    Number,
     String,
 
     Add,
@@ -38,16 +41,22 @@ namespace token
     string lit;
 
     Token(TokenType type, string lit)
-      : type(type),
-        lit(lit)
+        : type(type),
+          lit(lit)
     {
+    }
+     
+    friend ostream& operator<<(ostream& os, const Token& tok)
+    {
+      os << "Token {" << "Type" << ", " << tok.lit << "}";
+      return os;
     }
   };
 
   class TokenStream
   {
     size_t pos;
-    std::vector<Token> tokens;
+    vector<Token> tokens;
 
   public:
     const Token &peek() const;
