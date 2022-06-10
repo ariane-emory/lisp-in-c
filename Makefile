@@ -1,6 +1,6 @@
 UNAME_S = $(shell uname -s)
 CXX     = g++
-CXXLAGS = -std=gnu++17 -Wall -g -Wno-parentheses -Wno-unused-const-variable -Wextra	-Wpedantic -Wconversion # -Wshadow
+CXXLAGS = -std=gnu++17 -Wall -g -Wno-parentheses -Wno-unused-const-variable -Wextra -Wpedantic -Wconversion # -Wshadow
 SRC    = $(wildcard src/*.cpp)
 OBJ    = $(patsubst src/%.cpp, obj/%.o, $(SRC))
 UNAME  = $(shell uname)
