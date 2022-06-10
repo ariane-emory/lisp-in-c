@@ -4,7 +4,7 @@ using namespace token;
 using std::string;
 using std::vector;
 
-Token read_number(std::ifstream &src)
+Token read_number(std::ifstream src)
 {
   char c;
   string lit = "";
@@ -16,7 +16,7 @@ Token read_number(std::ifstream &src)
   return Token(TokenType::Number, lit);
 }
 
-Token read_ident(std::ifstream &src)
+Token read_ident(std::ifstream src)
 {
   char c;
   string lit = "";
@@ -28,7 +28,7 @@ Token read_ident(std::ifstream &src)
   return Token(TokenType::Number, lit);
 }
 
-TokenStream lex(std::ifstream &src)
+TokenStream lex(std::ifstream src)
 {
   char c;
   vector<Token> tokens;

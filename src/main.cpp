@@ -14,6 +14,7 @@ int main()
   // while (file.get(c))
   //   std::cout << c;
   // file.close();
+
   TokenStream tokens = lex(ifstream("examples/simple.lic"));
   while (tokens.peek().type != TokenType::Eof)
   {
