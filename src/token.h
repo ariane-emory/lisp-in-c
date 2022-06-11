@@ -72,7 +72,7 @@ namespace token
      
     friend ostream& operator<<(ostream& os, const Token& tok)
     {
-      os << "Token {" << TokenTypeNames[tok.type] << ", " << tok.lit << "}";
+      os << "Token {Type: " << TokenTypeNames[tok.type] << ", Lit: " << tok.lit << "}";
       return os;
     }
   };
