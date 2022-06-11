@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <map>
 
 using std::string;
 using std::ostream;
@@ -34,6 +35,29 @@ namespace token
     Lambda
   };
 
+  static std::map<TokenType, string> TokenTypeNames = 
+  {
+    {TokenType::Eof, "Eof"},
+    {TokenType::Err, "Err"},
+    {TokenType::Comment, "Comment"},
+
+    {TokenType::Ident, "Ident"},
+    {TokenType::Number, "Number"},
+    {TokenType::String, "String"},
+
+    {TokenType::Add, "Add"},
+    {TokenType::Sub, "Sub"},
+    {TokenType::Mul, "Mul"},
+    {TokenType::Quo, "Quo"},
+    {TokenType::Mod, "Mod"},
+
+    {TokenType::LParen, "LParen"},
+    {TokenType::RParen, "RParen"},
+
+    {TokenType::Let, "Let"},
+    {TokenType::Lambda, "Lambda"}
+  };
+
   class Token
   {
   public:
@@ -48,7 +72,7 @@ namespace token
      
     friend ostream& operator<<(ostream& os, const Token& tok)
     {
-      os << "Token {" << "Type" << ", " << tok.lit << "}";
+      os << "Token {" << TokenTypeNames[tok.type] << ", " << tok.lit << "}";
       return os;
     }
   };

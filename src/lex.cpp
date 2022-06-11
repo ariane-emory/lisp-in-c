@@ -1,8 +1,11 @@
 #include "lex.h"
 
 using namespace token;
-using std::string;
-using std::vector;
+
+static std::map<string, TokenType> keywords = {
+  {"let", TokenType::Let},
+  {"lambda", TokenType::Lambda}
+};
 
 Token read_number(std::ifstream &src)
 {
@@ -25,7 +28,9 @@ Token read_ident(std::ifstream &src)
     lit += c;
     src.get();
   }
-  return Token(TokenType::Number, lit);
+  return keywords.find(lit) != keywords.end()
+  ? Token(keywords[lit], lit)
+  : Token(TokenType::Ident, lit);
 }
 
 vector<Token> lex(std::ifstream src)
