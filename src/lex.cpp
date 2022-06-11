@@ -4,11 +4,11 @@ using namespace token;
 using std::string;
 using std::vector;
 
-Token read_number(std::ifstream & src)
+Token read_number(std::ifstream &src)
 {
   int c;
   string lit = "";
-  while ((! src.eof()) && isdigit(c = src.peek()))
+  while ((!src.eof()) && isdigit(c = src.peek()))
   {
     lit += static_cast<char>(c);
     src.get();
@@ -16,7 +16,7 @@ Token read_number(std::ifstream & src)
   return Token(TokenType::Number, lit);
 }
 
-Token read_ident(std::ifstream & src)
+Token read_ident(std::ifstream &src)
 {
   int c;
   string lit = "";
@@ -32,8 +32,7 @@ vector<Token> lex(std::ifstream src)
 {
   int c;
   vector<Token> tokens;
-
-  while ((! src.eof()) && (c = src.peek()))
+  while ((!src.eof()) && (c = src.peek()))
   {
     putchar(src.peek());
     switch (c)
