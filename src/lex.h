@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 
-token::TokenStream lex(std::ifstream src);
+
+vector<token::Token> lex(std::ifstream src);
 
 #endif

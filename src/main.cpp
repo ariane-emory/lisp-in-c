@@ -15,11 +15,10 @@ int main()
   //   std::cout << c;
   // file.close();
 
-  TokenStream tokens = lex(ifstream("examples/simple.lic"));
-  while (tokens.peek().type != TokenType::Eof)
-  {
-    std::cout << tokens.next() << std::endl;
-  }
-  
+  auto tokens = lex(ifstream("examples/simple.lic"));
+
+  for (auto token = tokens.begin(); token != tokens.end(); token++)
+    std::cout << *token << std::endl;
+
   return 0;
 }

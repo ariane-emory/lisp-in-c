@@ -28,11 +28,11 @@ Token read_ident(std::ifstream & src)
   return Token(TokenType::Number, lit);
 }
 
-TokenStream lex(std::ifstream src)
+vector<Token> lex(std::ifstream src)
 {
   int c;
   vector<Token> tokens;
-  TokenStream stream;
+
   while ((! src.eof()) && (c = src.peek()))
   {
     putchar(src.peek());
@@ -87,5 +87,5 @@ TokenStream lex(std::ifstream src)
     }
   }
   tokens.push_back(Token(TokenType::Eof, ""));
-  return stream;
+  return tokens;
 }
