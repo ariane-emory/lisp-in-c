@@ -35,7 +35,7 @@ namespace token
     Lambda
   };
 
-  static std::string TokenTypeNames[] = 
+  static const std::string TokenTypeNames[] = 
   {
     "Eof",
     "Err",
