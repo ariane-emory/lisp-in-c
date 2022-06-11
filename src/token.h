@@ -52,16 +52,6 @@ namespace token
       return os;
     }
   };
-
-  class TokenStream
-  {
-    size_t pos;
-    vector<Token> tokens;
-
-  public:
-    const Token &peek() const;
-    const Token &next();
-  };
 }
 
 #endif

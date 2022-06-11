@@ -4,7 +4,7 @@
 #include "lex.h"
 
 using std::ifstream;
-using token::TokenStream;
+using std::vector;
 using token::TokenType;
 
 int main()
@@ -15,11 +15,9 @@ int main()
   //   std::cout << c;
   // file.close();
 
-  TokenStream tokens = lex(ifstream("examples/simple.lic"));
-  while (tokens.peek().type != TokenType::Eof)
-  {
-    std::cout << tokens.next() << std::endl;
-  }
+  vector<Token> tokens = lex(ifstream("examples/simple.lic"));
+  for (auto tok = tokens.begin(); tok != tokens.end(); tok++)
+    std::cout << *tok << std::endl;
   
   return 0;
 }
