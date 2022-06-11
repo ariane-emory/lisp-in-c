@@ -4,7 +4,6 @@
 #include "lex.h"
 
 using std::ifstream;
-using token::TokenStream;
 using token::TokenType;
 
 int main()
