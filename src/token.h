@@ -35,7 +35,7 @@ namespace token
     Lambda
   };
 
-  static std::string TokenTypeNames[] = 
+  static constexpr std::string TokenTypeNames[] = 
   {
     "Eof",
     "Err",
@@ -71,10 +71,10 @@ namespace token
       }
      
     friend ostream& operator<<(ostream& os, const Token& tok)
-      {
-        os << "Token {" << TokenTypeNames[static_cast<int>(tok.type)] << ", " << tok.lit << "}";
-        return os;
-      }
+    {
+      os << "Token {" << TokenTypeNames[static_cast<int>(tok.type)] << ", " << tok.lit << "}";
+      return os;
+    }
   };
 
   class TokenStream
