@@ -32,30 +32,37 @@ vector<Token> lex(std::ifstream src)
 {
   char c;
   vector<Token> tokens;
-  while ((c = src.peek()))
+  while ((!src.eof()) && (c = src.peek()))
   {
     switch (c)
     {
     case '+':
       tokens.push_back(Token(TokenType::Add, "+"));
+      src.get();
       break;
     case '-':
       tokens.push_back(Token(TokenType::Sub, "-"));
+      src.get();
       break;
     case '*':
       tokens.push_back(Token(TokenType::Mul, "*"));
+      src.get();
       break;
     case '/':
       tokens.push_back(Token(TokenType::Quo, "/"));
+      src.get();
       break;
     case '%':
       tokens.push_back(Token(TokenType::Mod, "%"));
+      src.get();
       break;
     case '(':
       tokens.push_back(Token(TokenType::LParen, "("));
+      src.get();
       break;
     case ')':
       tokens.push_back(Token(TokenType::RParen, ")"));
+      src.get();
       break;
     default:
       if (isspace(c))
