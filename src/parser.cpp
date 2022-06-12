@@ -1,16 +1,16 @@
 #include "parser.h"
 
-Object parse_atom(TokenStream stream)
+Object parse_atom(std::vector<token::Token>::iterator &iter)
 {
 
 }
 
-Object parse_list(TokenStream stream) 
+Object parse_list(std::vector<token::Token>::iterator &iter) 
 {
 
 }
 
-Object parse(TokenStream stream)
+Object parse(vector<Token> tokens)
 {
-  
+  tokens.begin();
 }
