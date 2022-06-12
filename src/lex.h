@@ -9,6 +9,6 @@
 using std::vector;
 using namespace token;
 
-TokenStream lex(std::ifstream src);
+vector<Token> lex(std::ifstream src);
 
 #endif
