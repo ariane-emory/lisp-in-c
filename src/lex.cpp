@@ -1,7 +1,5 @@
 #include "lex.h"
 
-using namespace token;
-
 static std::map<string, TokenType> keywords = {
   {"let", TokenType::Let},
   {"lambda", TokenType::Lambda}
@@ -33,7 +31,7 @@ Token read_ident(std::ifstream &src)
   : Token(TokenType::Ident, lit);
 }
 
-vector<Token> lex(std::ifstream src)
+TokenStream lex(std::ifstream src)
 {
   char c;
   vector<Token> tokens;
@@ -90,5 +88,6 @@ vector<Token> lex(std::ifstream src)
     }
   }
   tokens.push_back(Token(TokenType::Eof, ""));
-  return tokens;
+
+  return TokenStream(tokens);
 }

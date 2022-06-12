@@ -7,8 +7,8 @@
 #include <map>
 
 using std::vector;
-using token::Token;
+using namespace token;
 
-vector<Token> lex(std::ifstream src);
+TokenStream lex(std::ifstream src);
 
 #endif

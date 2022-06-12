@@ -15,9 +15,9 @@ int main()
   //   std::cout << c;
   // file.close();
 
-  vector<Token> tokens = lex(ifstream("examples/simple.lic"));
-  for (auto tok = tokens.begin(); tok != tokens.end(); tok++)
-    std::cout << *tok << std::endl;
+  TokenStream tokens = lex(ifstream("examples/simple.lic"));
+  while (tokens.peek().type != TokenType::Eof)
+    std::cout << tokens.next() << std::endl;
   
   return 0;
 }
