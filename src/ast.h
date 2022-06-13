@@ -5,18 +5,25 @@
 
 namespace ast
 {
+  class Object;
+  
+  union ObjectValue
+  {
+    double number;
+    std::string symbol;
+    class List
+    {
+      Object *car;
+      Object *cdr;
+    };
+
+    ~ObjectValue() {}
+  };
+
   class Object
   {
-    union
-    {
-      double number;
-      std::string symbol;
-      class List
-      {
-        Object *car;
-        Object *cdr;
-      };
-    };
+  public:
+    ObjectValue value;
   };
 }
 
