@@ -6,6 +6,7 @@
 
 using ast::Object;
 using token::Token;
+using token::TokenType;
 
 namespace parser
 {

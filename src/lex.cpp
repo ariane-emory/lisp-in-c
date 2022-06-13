@@ -35,6 +35,8 @@ vector<Token> lex(std::ifstream src)
 {
   char c;
   vector<Token> tokens;
+  tokens.push_back(Token(TokenType::LParen, "("));
+
   while ((!src.eof()) && (c = src.peek()))
   {
     switch (c)
@@ -87,6 +89,7 @@ vector<Token> lex(std::ifstream src)
       break;
     }
   }
+  tokens.push_back(Token(TokenType::RParen, ")"));
   tokens.push_back(Token(TokenType::Eof, ""));
 
   return tokens;

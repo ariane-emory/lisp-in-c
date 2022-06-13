@@ -35,27 +35,27 @@ namespace token
     Lambda
   };
 
-  static std::map<TokenType, string> TokenTypeNames =
-      {
-          {TokenType::Eof, "Eof"},
-          {TokenType::Err, "Err"},
-          {TokenType::Comment, "Comment"},
+  static std::map<TokenType, string> TokenTypeNames = {
+    {TokenType::Eof, "Eof"},
+    {TokenType::Err, "Err"},
+    {TokenType::Comment, "Comment"},
 
-          {TokenType::Ident, "Ident"},
-          {TokenType::Number, "Number"},
-          {TokenType::String, "String"},
+    {TokenType::Ident, "Ident"},
+    {TokenType::Number, "Number"},
+    {TokenType::String, "String"},
 
-          {TokenType::Add, "Add"},
-          {TokenType::Sub, "Sub"},
-          {TokenType::Mul, "Mul"},
-          {TokenType::Quo, "Quo"},
-          {TokenType::Mod, "Mod"},
+    {TokenType::Add, "Add"},
+    {TokenType::Sub, "Sub"},
+    {TokenType::Mul, "Mul"},
+    {TokenType::Quo, "Quo"},
+    {TokenType::Mod, "Mod"},
 
-          {TokenType::LParen, "LParen"},
-          {TokenType::RParen, "RParen"},
+    {TokenType::LParen, "LParen"},
+    {TokenType::RParen, "RParen"},
 
-          {TokenType::Let, "Let"},
-          {TokenType::Lambda, "Lambda"}};
+    {TokenType::Let, "Let"},
+    {TokenType::Lambda, "Lambda"}
+  };
 
   class Token
   {
