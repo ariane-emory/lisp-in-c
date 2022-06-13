@@ -4,10 +4,10 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include <array>
+#include <map>
 
-using std::string;
 using std::ostream;
+using std::string;
 using std::vector;
 
 namespace token
@@ -35,46 +35,41 @@ namespace token
     Lambda
   };
 
-  static const std::string TokenTypeNames[] = 
-  {
-    "Eof",
-    "Err",
-    "Comment",
+  static std::map<TokenType, string> TokenTypeNames = {
+    {TokenType::Eof, "Eof"},
+    {TokenType::Err, "Err"},
+    {TokenType::Comment, "Comment"},
 
-    "Ident",
-    "Number",
-    "String",
+    {TokenType::Ident, "Ident"},
+    {TokenType::Number, "Number"},
+    {TokenType::String, "String"},
 
-    "Add",
-    "Sub",
-    "Mul",
-    "Quo",
-    "Mod",
+    {TokenType::Add, "Add"},
+    {TokenType::Sub, "Sub"},
+    {TokenType::Mul, "Mul"},
+    {TokenType::Quo, "Quo"},
+    {TokenType::Mod, "Mod"},
 
-    "LParen",
-    "RParen",
+    {TokenType::LParen, "LParen"},
+    {TokenType::RParen, "RParen"},
 
-    "Let",
-    "Lambda"
+    {TokenType::Let, "Let"},
+    {TokenType::Lambda, "Lambda"}
   };
-  
+
   class Token
   {
   public:
     TokenType type;
     string lit;
 
-    Token(TokenType type, string lit)
-      : type(type),
-        lit(lit)
-      {
-      }
-     
-    friend ostream& operator<<(ostream& os, const Token& tok)
-      {
-        os << "Token {" << TokenTypeNames[static_cast<int>(tok.type)] << ", " << tok.lit << "}";
-        return os;
-      }
+    Token(TokenType type, string lit) : type(type), lit(lit){};
+
+    friend ostream &operator<<(ostream &os, const Token &tok)
+    {
+      os << "Token {Type: " << TokenTypeNames[tok.type] << ", Lit: " << tok.lit << "}";
+      return os;
+    }
   };
 }
 

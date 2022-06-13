@@ -4,9 +4,10 @@
 #include "token.h"
 #include <string>
 #include <fstream>
+#include <map>
 
 using std::vector;
-using token::Token;
+using namespace token;
 
 vector<Token> lex(std::ifstream src);
 
